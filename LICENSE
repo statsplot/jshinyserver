@@ -1,0 +1,39 @@
+jShiny server
+Copyright 2016 Fan Zhan
+
+Licensed under the the AGPLv3 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.gnu.org/licenses/agpl-3.0.html
+    
+	
+
+Opensource projects used in this project.
+
+javasysmon
+javasysmon-0.3.4-jdk8.jar (javasysmon complied against JDK 8)
+https://github.com/jezhumble/javasysmon
+JavaSysMon uses the NetBSD (2-line) license. Copyright 2009 ThoughtWorks, Inc.
+
+
+B4J libraries (https://b4x.com) : 
+
+jShell
+Wrapper of https://commons.apache.org/exec/
+Apache License 2.0
+
+jServer and jWebSocketClient
+Wrappers of Jetty http://www.eclipse.org/jetty/
+Apache License 2.0
+
+jHTTP (included in B4J 3.71 as internal library, it's replaced with OkHttp in B4J 4.21)
+Wrapper of Apache httpclient
+Apache License 2.0
+
+
+ByteConverter 1.10
+Encryption 1.10
+
+And some other internal libraries in B4J 4.21 
+

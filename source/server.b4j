@@ -1,0 +1,147 @@
+﻿Version=4.2
+AppType=StandardJava
+NumberOfModules=10
+Module1=wsRelayHandler
+Module2=comFunMod
+Module3=wsclientClassMod
+Module4=httpRelayHandler
+Module5=HttpJob
+Module6=appM
+Module7=httpRequestFilter
+Module8=HttpUtils2Service
+Module9=FileUtils
+Module10=CltUtils
+Build1=ReleaseConfig,com.statsplot.shinyserver
+NumberOfFiles=0
+NumberOfLibraries=12
+Library1=jcore
+Library2=jserver
+Library3=javaobject
+Library4=json
+Library5=jstringutils
+Library6=jwebsocketclient
+Library7=jnetwork
+Library8=jshell
+Library9=jrandomaccessfile
+Library10=encryption
+Library11=byteconverter
+Library12=okhttp
+@EndOfDesignText@
+'Non-UI application (console / server application)
+#Region  Project Attributes 
+	#CommandLineArgs:
+	#MergeLibraries: True	
+	#VirtualMachineArgs: -XX:NativeMemoryTracking=detail -Dfile.encoding=UTF-8
+#End Region
+
+#AdditionalJar: javasysmon-0.3.4-jdk8
+
+Sub Process_Globals
+	Public ShinyServerVersion As String = "0.94"	
+	Public ShinyServerVersion_Minor As String = "beta1"	
+	
+	Public srvr As Server
+
+	Public DirTemp As String
+	Public htmlRootPath As String = "shiny"
+
+
+	Public srvrPort As Int 
+
+	Public OSName As String  'same value as appM.OSName
+	
+
+	Public staticFilesPath As String
+	Public configPath As String
+	Public ServerPIDPath As String
+	Public testPath As String
+	Public testConfigPath As String
+	Public LogsPath As String
+	
+	Public bookmarkstatedir As String 
+	
+
+End Sub
+
+Sub AppStart (Args() As String)
+'	comFunMod.LogFmt("info", "", $" Server starting ============ "$)	
+	staticFilesPath = File.DirApp&"/www"
+	configPath = File.DirApp&"/config"
+	ServerPIDPath = File.DirApp & "/pid"
+	testPath = File.DirApp & "/test"
+	bookmarkstatedir = File.DirApp & "/bookmarkstate"
+	bookmarkstatedir = FileUtils.File_FullPath(bookmarkstatedir)
+	
+	LogsPath = File.DirApp&"/logs" 
+	LogsPath = FileUtils.File_FullPath(LogsPath)
+	 	
+	
+	DirTemp = File.DirTemp
+	DirTemp = FileUtils.File_CreateSubFolder( File.DirTemp , "rshiny" ) '&DateTime.Now)	
+	Dim tmpDirPids As String = FileUtils.File_CreateSubFolder( DirTemp , "pids")	
+
+	appM.Initialize(tmpDirPids)
+	OSName = appM.OSName
+
+		
+	If comFunMod.checkConfigAvailable = False Then
+		ExitApplication
+	End If
+	
+	srvrPort = appM.getSettingMapValue("port" )  
+	htmlRootPath = appM.getSettingMapValue("htmlroot")
+ 	
+		
+	Log($"TmpDir = ${DirTemp}"$)
+	comFunMod.printSystemInformation
+	appM.printSettingMapValue
+
+	comFunMod.checkandPrepareShinyFiles
+
+	srvr.Initialize("srvr")
+	appM.updateinFolderAppname(True)
+	
+	
+	If comFunMod.initshinyvMap("shinyversion.conf",True) = False Then
+		comFunMod.LogFmt("error", "initshinyvMap", $" init shinyversion Map failed. Server exit "$)
+		ExitApplication
+	End If
+	
+	
+	comFunMod.initshinyvMap("shinyversion_additional.conf",False)
+
+	
+'filter for all http request in 
+	srvr.AddFilter("/*", "httpRequestFilter",False)
+
+
+
+'handler for get and post request for shiny app (indexpage, js/css, download/upload)
+	srvr.AddHandler("/" & htmlRootPath & "/*" , "httpRelayHandler",False)	
+	
+'relay for websockets
+	srvr.AddWebSocket("/relay/ws", "wsRelayHandler")
+
+	
+	srvr.port = srvrPort
+	srvr.DebugNetworkLatency = 200
+	srvr.LogsRetainDays=10	
+	comFunMod.Server_setStaticAndErrorpages(srvr)	
+						
+	srvr.Start
+		
+	comFunMod.LogFmt("info", "", $" Server started ============ "$)
+	comFunMod.Server_RemoveVersionFromResponses(srvr)
+	comFunMod.Server_setFormMaxSize(srvr, appM.formMaxSizeKb)
+
+
+'write pid of server	
+	File.Delete(ServerPIDPath,"server.pid")
+	File.WriteString(ServerPIDPath,"server.pid",comFunMod.getPID)
+
+	StartMessageLoop
+	comFunMod.LogFmt("fatal", "", $" main thread StopMessageLoop;Sever will not work "$)
+	
+End Sub
+
+
