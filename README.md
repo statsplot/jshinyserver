@@ -28,7 +28,7 @@
   [Download jShiny Server]
 
 ### Change logs
-* [Change logs](changelogs.md)  
+* [Change logs] 
   
 ### License
    Free and open source AGPLv3
