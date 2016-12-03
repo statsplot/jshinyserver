@@ -89,15 +89,16 @@ fi
 
 #### Config
 Move the downloaded file to a folder with proper read and write permission (e.g. `/opt/shiny`). Untar the file.  
-Find absolute path of R bin
+Find absolute path of R bin. 
 ```
   which R
 ```
 
-Edit `system_linux.conf` or `system_mac.conf`  in the config folder with plain text editor. You need to set rbin.
+`/usr/bin/R` is the default value, if your path is not the same as this one, you need to edit `system_linux.conf` or `system_mac.conf`  in the config folder with plain text editor. You need to set rbin.
 ```
-linux: nano ${installationpath}/server/config/system_linux.conf
-mac: nano ${installationpath}/server/config/system_mac.conf 
+INS_PATH=/opt/shiny
+linux: nano ${INS_PATH}/server/config/system_linux.conf
+mac: nano ${INS_PATH}/server/config/system_mac.conf 
   
   #----- rbin  absolute path of R bin
   rbin = /usr/bin/R
