@@ -48,7 +48,47 @@ Close the command line Windows.
 Or double click stop.bat (It will also stop the running R instances started by the server.).
 
 ### Linux/Mac
-[Download]
+[Download]  or install with scripts 
+```
+
+#replace the version number 
+#server is installed to /opt/shiny/server
+VER="v0.94-beta.1"
+
+DL_PATH=/opt/shiny/download/${VER}
+INS_PATH=/opt/shiny
+mkdir -p ${DL_PATH}
+mkdir -p ${INS_PATH}
+
+if [ -L "${INS_PATH}/server" ] ; then
+    echo "Remove previous symbolic link to ${INS_PATH}/server"
+	rm -rf "${INS_PATH}/server"
+fi
+
+if [ -d "${INS_PATH}/server" ]; then
+	DATE=`date +%Y-%m-%d-%H-%M-%S`
+	PREV_VER_PATH=/opt/shiny/previous/${DATE}
+	mkdir -p ${PREV_VER_PATH}
+	mv -f ${INS_PATH}/server ${PREV_VER_PATH}
+	echo "Previous files are moved to ${PREV_VER_PATH}"
+fi
+
+wget -nv -O  ${DL_PATH}/${VER}-build.tar.gz https://github.com/statsplot/jshinyserver/releases/download/${VER}/${VER}-build.tar.gz
+
+tar zxf ${DL_PATH}/${VER}-build.tar.gz -C ${DL_PATH}
+
+ln -s  ${DL_PATH}/server ${INS_PATH}/server 
+
+if [ -L "${INS_PATH}/server" ] ; then
+    echo "jShiny server ${VER} installed to ${INS_PATH}/server"
+else
+	echo "Error. Fail to installed jShiny server ${VER}"
+fi
+
+# cd ${INS_PATH}/server
+
+```
+
 
 #### Config
 Move the downloaded file to a folder with proper read and write permission (e.g. `/opt/shiny`). Untar the file.  
