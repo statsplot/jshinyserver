@@ -29,7 +29,7 @@ Library12=okhttp
 @EndOfDesignText@
 'Non-UI application (console / server application)
 #Region  Project Attributes 
-	#CommandLineArgs:
+	#CommandLineArgs: 
 	#MergeLibraries: True	
 	#VirtualMachineArgs: -XX:NativeMemoryTracking=detail -Dfile.encoding=UTF-8
 #End Region
@@ -38,7 +38,7 @@ Library12=okhttp
 
 Sub Process_Globals
 	Public ShinyServerVersion As String = "0.94"	
-	Public ShinyServerVersion_Minor As String = "beta1"	
+	Public ShinyServerVersion_Minor As String = "beta2"	
 	
 	Public srvr As Server
 
@@ -80,7 +80,8 @@ Sub AppStart (Args() As String)
 	DirTemp = FileUtils.File_CreateSubFolder( File.DirTemp , "rshiny" ) '&DateTime.Now)	
 	Dim tmpDirPids As String = FileUtils.File_CreateSubFolder( DirTemp , "pids")	
 
-	appM.Initialize(tmpDirPids)
+
+	appM.Initialize(tmpDirPids,Args)
 	OSName = appM.OSName
 
 		

@@ -1,7 +1,13 @@
 #!/bin/sh
 # unix format file ANSI
 # test on Ubuntu 14.04lts
-cd $1
+
+defdir=$1
+if [ "$#" -lt 1 ]; then
+  defdir=/opt/shiny/server
+fi
+cd ${defdir}
+
 if [ -f pid/server.pid ]; then
     echo ""
 else

@@ -52,7 +52,7 @@ Or double click stop.bat (It will also stop the running R instances started by t
 ```
 #replace the version number 
 #server is installed to /opt/shiny/server
-VER="v0.94-beta.1"
+VER="v0.94-beta.2"
 
 DL_PATH=/opt/shiny/download/${VER}
 INS_PATH=/opt/shiny

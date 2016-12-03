@@ -80,7 +80,8 @@ Sub Process_Globals
 End Sub
 
 'Initializes the object. You can add parameters to this method if needed.
-Public Sub Initialize(DirPidstr As String )
+' array() string ("stopr") just to stop r instances and server exit
+Public Sub Initialize(DirPidstr As String, InputArgs() As String)
 	currentPortNo = comFunMod.rndPortMin
 	DirPids = DirPidstr
 	File2ClearextMap = CreateMap(".pid":"", ".input":"",".script":"",".error":"")
@@ -90,6 +91,17 @@ Public Sub Initialize(DirPidstr As String )
 	OSName = getOSName
 	setSettingMap(OSName)
 
+
+'check input args
+	Dim isstopPreRInstances As Boolean = False
+	If InputArgs.Length>0 Then
+		Dim Actions As String = InputArgs(0)
+		If Actions="stopr" Then
+			isstopPreRInstances = True	
+		End If
+	End If
+
+
 'set stdOut and stdErr redirection
 
 	Dim isRunningFromIDE As Boolean = False
@@ -98,12 +110,15 @@ Public Sub Initialize(DirPidstr As String )
 	End If
 	
 	Dim redirect_output As String = getSettingMapValue("redirect_output")
-	If redirect_output.ToLowerCase ="true" And isRunningFromIDE=False Then
+	If isstopPreRInstances=False And redirect_output.ToLowerCase ="true" And isRunningFromIDE=False Then
 		comFunMod.RedirectOutput(Main.LogsPath,$"server_output_${comFunMod.PrintDT2}.log"$)
 	End If
-	comFunMod.LogFmt("info", "", $" Server starting ============ "$)	
-
-
+	
+	If isstopPreRInstances Then
+			
+	Else
+		comFunMod.LogFmt("info", "", $" Server starting ============ "$)	
+	End If
 
 	isEnableJavasysmon = True
 
@@ -148,6 +163,11 @@ Public Sub Initialize(DirPidstr As String )
 	
 	stopPreviousRInstances(DirPids)
 	FileUtils.File_ClearFolder_extfilter(DirPids,File2ClearextMap)	
+	
+	If isstopPreRInstances Then
+		'Log($"[info]${TAB}${comFunMod.PrintDT}${TAB}stopPreviousRInstances${TAB}stop previous R Instances"$)
+		ExitApplication	
+	End If
 	
 	AppnameConfTsMap = Main.srvr.CreateThreadSafeMap
 	inFolderAppnameTsMap = Main.srvr.CreateThreadSafeMap
@@ -957,7 +977,6 @@ Public Sub TScheckServerBusy As Int
 	Return 20
 	
 End Sub
-
 
 
 

@@ -45,3 +45,17 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+# B4J Files
+source/Objects/src/
+source/Objects/bin/
+source/Objects/shell/
+source/Objects/pid/
+source/Objects/logs/
+
+
+
+
+source/Objects/www/servertimestamp.html
+source/Objects/server.jar
