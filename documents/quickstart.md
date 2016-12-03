@@ -108,10 +108,18 @@ mac: nano ${INS_PATH}/server/config/system_mac.conf
 
 Open a new terminal. 
 ```
+INS_PATH=/opt/shiny
 # first argument should be the absolute path to the server folder,  if not provided default value (`/opt/shiny/server`) will be used
-/bin/sh /opt/shiny/server/start.sh /opt/shiny/server. 
+/bin/sh ${INS_PATH}/server/start.sh ${INS_PATH}/server
 ```
 You have to check server log `server_cmd.log` or `server_output_{date time}.log` if the server fail to start.
+```
+INS_PATH=/opt/shiny
+cd ${INS_PATH}/server/logs
+tail server_cmd.log
+tail server_output_{date time}.log
+```
+
 
 #### Check if the server is running
 Now start a web browser and point it to http://{ip}:{port}/index.html {ip} is the host ip , {port} is the server port  
@@ -119,8 +127,9 @@ If web browser is on the same host, the default url should be http://127.0.0.1:8
 
 #### Stop the server
 ```
+INS_PATH=/opt/shiny
 # first argument should be the absolute path to the server folder,  if not provided default value (/opt/shiny/server) will be used
-/bin/sh /opt/shiny/server/stop.sh /opt/shiny/server
+/bin/sh ${INS_PATH}/server/stop.sh ${INS_PATH}/server
 ```
 It will also stop the running R instances started by the server.
 
