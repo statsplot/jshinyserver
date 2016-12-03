@@ -50,7 +50,6 @@ Or double click stop.bat (It will also stop the running R instances started by t
 ### Linux/Mac
 [Download]  or install with scripts 
 ```
-
 #replace the version number 
 #server is installed to /opt/shiny/server
 VER="v0.94-beta.1"
@@ -73,19 +72,17 @@ if [ -d "${INS_PATH}/server" ]; then
 	echo "Previous files are moved to ${PREV_VER_PATH}"
 fi
 
-wget -nv -O  ${DL_PATH}/${VER}-build.tar.gz https://github.com/statsplot/jshinyserver/releases/download/${VER}/${VER}-build.tar.gz
+wget --no-check-certificate -nv -O  ${DL_PATH}/${VER}-build.tar.gz https://github.com/statsplot/jshinyserver/releases/download/${VER}/${VER}-build.tar.gz
 
 tar zxf ${DL_PATH}/${VER}-build.tar.gz -C ${DL_PATH}
 
 ln -s  ${DL_PATH}/server ${INS_PATH}/server 
 
-if [ -L "${INS_PATH}/server" ] ; then
+if [ -L "${INS_PATH}/server" ] && [ -e "${INS_PATH}/server" ] ; then
     echo "jShiny server ${VER} installed to ${INS_PATH}/server"
 else
-	echo "Error. Fail to installed jShiny server ${VER}"
+    echo "Error. Fail to installed jShiny server ${VER}"
 fi
-
-# cd ${INS_PATH}/server
 
 ```
 
