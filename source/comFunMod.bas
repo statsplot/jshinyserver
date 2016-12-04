@@ -495,7 +495,7 @@ Public Sub printSystemInformation
 	DateTime.DateFormat="yyyy-MM-dd"
  	DateTime.TimeFormat="HH:mm:ss"	
 	Log($"Time = ${DateTime.Date(DateTime.Now)} ${DateTime.Time(DateTime.Now)} UTC"$)	
-	Log($"Serverversion = ${Main.ShinyServerVersion}.${Main.ShinyServerVersion_Minor}"$)
+	Log($"Serverversion = ${Main.ShinyServerVersion}-${Main.ShinyServerVersion_Minor}"$)
 	Dim NativeMe As JavaObject
 	NativeMe = Me
 	Dim SystemInfoMap As Map = NativeMe.RunMethod("getSystemInfomation", Null)

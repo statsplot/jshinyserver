@@ -37,8 +37,8 @@ Library12=okhttp
 #AdditionalJar: javasysmon-0.3.4-jdk8
 
 Sub Process_Globals
-	Public ShinyServerVersion As String = "0.94"	
-	Public ShinyServerVersion_Minor As String = "beta2"	
+	Public ShinyServerVersion As String = "v0.94"	
+	Public ShinyServerVersion_Minor As String = "beta.3"	
 	
 	Public srvr As Server
 
@@ -74,7 +74,9 @@ Sub AppStart (Args() As String)
 	
 	LogsPath = File.DirApp&"/logs" 
 	LogsPath = FileUtils.File_FullPath(LogsPath)
-	 	
+	
+	FileUtils.File_CreateFolderIfNotExsit(File.DirApp,"pid")	
+	FileUtils.File_CreateFolderIfNotExsit(File.DirApp,"logs")	
 	
 	DirTemp = File.DirTemp
 	DirTemp = FileUtils.File_CreateSubFolder( File.DirTemp , "rshiny" ) '&DateTime.Now)	
