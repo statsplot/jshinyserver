@@ -9,7 +9,7 @@ Install R and shiny package
     packageVersion("shiny")
 ```
 Note that only shiny versions (CRAN) 0.12.0 - 0.14.2 are supported by jShiny server V0.94  
-If you are using other shiny versions from github or CRAN (>=0.14), see this [beta feature]
+If you are using other shiny versions from github or CRAN (>=0.14), see this [Experimental feature]
 
 #### Install Oracle Java 8 (8u40+) 
  Verify if Java is installed and version 
@@ -100,5 +100,5 @@ It will also stop the running R instances started by the server.
 
 
 
-[beta feature]: betafeatures.md#unsupported-shiny-versions
+[Experimental feature]: betafeatures.md#unsupported-shiny-versions
 [Download]: ../../../releases
