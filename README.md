@@ -21,7 +21,7 @@
 * [Logs]
 * [Production deployment]
 * [Html pages and shiny app folder]
-* [Beta features]
+* [Experimental features]
 * [Build from source]
 
 ### Download
@@ -43,5 +43,5 @@
 [Logs]: documents/logs.md
 [Html pages and shiny app folder]: documents/htmlpages.md
 [Production deployment]: documents/production.md
-[Beta features]: documents/betafeatures.md
+[Experimental features]: documents/betafeatures.md
 [Build from source]: documents/build.md
