@@ -1,20 +1,22 @@
 ## Building from source
 
-You can build the server from source on Windows. Please download the source code and libraries needed [Download] . Move them to a folder (e.g. `D:\shiny`) and unzip them.
+You can build the server from source on Windows. Please download the releases [Download] or the lastest Github source code. Move it to a folder (e.g. `D:\shiny`) and unzip them.
 
 ### Install B4J IDE
-Please install B4J IDE per the instructions in https://b4x.com/b4j.html. This project is built with Version 4.20(1). Note that you need to install JDK instead of JRE.
+Please install B4J IDE per the instructions in https://b4x.com/b4j.html. This project is built with Version 4.20(1) or above. Note that you need to install JDK instead of JRE.  
 
-jCore library(4.20) in B4J 4.20 contains a bug ( https://www.b4x.com/android/forum/threads/updates-to-internal-libaries.48274/#post-416708 ). It’s been fixed in B4J 4.50.
+Dependencies are in `dependencies_for_building.zip`, unzip them to a folder e.g. `D:\shiny\libs\additional` 
+
+A bug was reported in jCore library(4.20) which comes with B4J 4.20  ( https://www.b4x.com/android/forum/threads/updates-to-internal-libaries.48274/#post-416708 ). It’s been fixed in B4J 4.50.
 
 When using B4J 4.20, you need to update the jCore library.
-Copy the files in `D:\shiny\libs\Libraries` to overwrite existing libraries in internal library folder (e.g. `C:\Program Files\Anywhere Software\B4J\Libraries` )
+Copy the files in `D:\shiny\libs\Libraries` to overwrite existing libraries in internal library folder (e.g. `C:\Program Files\Anywhere Software\B4J\Libraries` )  
+Open B4J, choose Tools > Configure Paths, set the additional lib path (`D:\shiny\libs\additional`). Close the B4J IDE(to refresh the updated libraries).  
+
 
 ### Build
 
-Open B4J, choose Tools > Configure Paths, set the additional lib path (`D:\shiny\libs\additional`). Close the B4J IDE(to refresh the updated libraries).
-
-Double click server.b4j (`D:\shiny\source\server.b4j`) to load the server project.
+Double click server.b4j (`D:\shiny\{version}\source\server.b4j`) to load the server project.
 
 Select Release mode (drop list Debug/Release/Release(obfuscated)) and press run(F5). You can find compiled file `Objects\server.jar`. Now that the sever is running from B4J IDE, you can choose the Logs tab (right bottom) press Kill Process.
 
