@@ -6,6 +6,8 @@
   
 * [Multiple R instances](#multiple-r-instances)
 
+* [Troubleshooting]
+
 
 ### Server settings
 All server settings files can be found in `config` folder Config files start with `system_` contain the server settings :
@@ -59,6 +61,7 @@ the max size(kB) for websocket message; they should be the same most of the time
 max size(kB) for post request to the server, e.g. upload file size, ajax request size. If the request size exceeds the request will be rejected default value = 3000
 
   - **cpulimit1 cpulimit2 memlimit1 memlimit2**  
+Only need to set these if the system is running low on memory/cpu. OS will try to kill some processes when not enough memory is available.  
 memlimit1 memlimit2 : threshold of free memory(MB)  
 cpulimit1 cpulimit2 : threshold of cpu usage (percentage*100),should be a float number between 0 and 1.  
 When the threshold exceeded, a `server is too busy` page will be shown.  
@@ -119,7 +122,7 @@ Note: The OS specific config file has higher priority. Server port of the exampl
 
 
 
-#### Multiple R instances
+### Multiple R instances
 The server start a single R instance for each shiny app by default.  
 Since version 0.94, you can start a new R instances for each visitor. 
 Add shiny app name to `config/r_multisession.conf` in a new line, without heading/tailing spaces. It will take effect after the server is restarted.    
@@ -131,4 +134,33 @@ The shiny app can be accessed like normal ones with url like this:
 `http://{ip/domain}:{port}/shiny/001-hello/index.html`  
 The page will be redirected to url with extra workerid (wakyko4rqn2u) :   
 `http://{ip/domain}:{port}/shiny/001-hello/_._wakyko4rqn2u/index.html?__app__=001-hello&__w__=wakyko4rqn2u` 
+
+
+
+
+### Troubleshooting
+  - **Server fail to start**
+You have to check server log `server_cmd.log` and `server_output_{date time}.log` if the server fail to start. Check any lines start with [Error]
+
+  - **Unicode characters are not displayed correctly **
+You need to check if the OS and R programme support unicode characters. Typically you need to install language and font packages, and set environment variables.  
+A shiny app contains unicode characters, the file format should be UTF-8(without BOM).  
+A shiny app folder contains unicode characters may also cause issues.  
+You can run shiny app from R(command line) manually, to see whether it works.  
+
+  - **Some shiny apps don't work**
+This usually happens when dependencies are not met, or R packages are not installed. 
+You can run this shiny app from R(command line) manually on the host where the server is running, to see whether it works.  
+If a shiny app doesn’t work, you need to check the following logs:  
+`logs/app_{appname}.log`  
+`logs/server_cmd.log`  
+`logs/server_output_{date time}.log`  
+If no information can be found in app/server logs, you should set loglevel=debug. See the detail in loglevel section of configuration document.
+
+
+
+
+
+
+
 

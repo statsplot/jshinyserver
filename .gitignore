@@ -58,4 +58,4 @@ source/Objects/logs/
 
 
 source/Objects/www/servertimestamp.html
-source/Objects/server.jar
+# source/Objects/server.jar
