@@ -1,5 +1,5 @@
-## Beta features
-  Beta features are experimental and they could be removed in future versions.
+## Experimental features
+  Experimental features could be removed in future versions.
   
 ### Unsupported shiny versions
   jShiny server served the shiny `shared` files as static files, this makes the page loading speed faster. 
