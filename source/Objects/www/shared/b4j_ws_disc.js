@@ -58,7 +58,13 @@ function b4j_connect(absolutePath) {
         return;
     }
     var l = window.location, fullpath;
-    fullpath = ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + ":" + l.port + absolutePath;
+
+    var porti = l.port;
+    if (porti ===""){
+        porti = ((l.protocol === "https:") ? 443 : 80);
+    }
+    fullpath = ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + ":" + porti + absolutePath;	
+
     b4j_ws = new WebSocket(fullpath);
     b4j_ws.onmessage = function (event) {
         var ed = JSON.parse(event.data);

@@ -60,7 +60,12 @@ function socket_address(path_par){
 	var wsPath = _g_wsPath;
 
 	var l = window.location, fullpath;
-	fullpath = ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + ":" + l.port + wsPath;
+	
+    var porti = l.port;
+    if (porti ===""){
+        porti = ((l.protocol === "https:") ? 443 : 80);
+    }
+    fullpath = ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + ":" + porti + wsPath;	
 
 	return fullpath + window.location.search;	
 

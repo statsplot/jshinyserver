@@ -38,7 +38,7 @@ Library12=okhttp
 
 Sub Process_Globals
 	Public ShinyServerVersion As String = "v0.94"	
-	Public ShinyServerVersion_Minor As String = "beta.3"	
+	Public ShinyServerVersion_Minor As String = "beta.4"	
 	
 	Public srvr As Server
 
