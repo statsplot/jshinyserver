@@ -42,6 +42,6 @@
 [Configuration]: documents/configuration.md
 [Logs]: documents/logs.md
 [Html pages and shiny app folder]: documents/htmlpages.md
-[Production deployment]: documents/production.md
+[Production deployment and troubleshooting]: documents/production.md
 [Experimental features]: documents/betafeatures.md
 [Build from source]: documents/build.md
