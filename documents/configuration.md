@@ -6,7 +6,7 @@
   
 * [Multiple R instances](#multiple-r-instances)
 
-* [Troubleshooting](#troubleshooting)
+
 
 
 ### Server settings
@@ -135,28 +135,6 @@ The shiny app can be accessed like normal ones with url like this:
 The page will be redirected to url with extra workerid (wakyko4rqn2u) :   
 `http://{ip/domain}:{port}/shiny/001-hello/_._wakyko4rqn2u/index.html?__app__=001-hello&__w__=wakyko4rqn2u` 
 
-
-
-
-### Troubleshooting
-
-  - **Server fail to start**  
-You have to check server log `server_cmd.log` and `server_output_{date time}.log` if the server fail to start. Check any lines start with [Error]
-
-  - **Unicode characters are not displayed correctly**  
-You need to check if the OS and R programme support unicode characters. Typically you need to install language and font packages, and set environment variables.  
-A shiny app contains unicode characters, the file format should be UTF-8(without BOM).  
-A shiny app folder contains unicode characters may also cause issues.  
-You can run shiny app from R(command line) manually, to see whether it works.  
-
-  - **Some shiny apps don't work**  
-This usually happens when dependencies are not met, or R packages are not installed. 
-You can run this shiny app from R(command line) manually on the host where the server is running, to see whether it works.  
-If a shiny app doesn’t work, you need to check the following logs:  
-`logs/app_{appname}.log`  
-`logs/server_cmd.log`  
-`logs/server_output_{date time}.log`  
-If no information can be found in app/server logs, you should set loglevel=debug. See the detail in **loglevel** section of configuration document.
 
 
 

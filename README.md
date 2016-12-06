@@ -19,7 +19,7 @@
 * [Quick start] 
 * [Configuration]
 * [Logs]
-* [Production deployment]
+* [Production deployment and troubleshooting]
 * [Html pages and shiny app folder]
 * [Experimental features]
 * [Build from source]
