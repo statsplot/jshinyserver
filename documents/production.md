@@ -2,9 +2,8 @@
 
 
 ### Environment 
-Only tested with latest Firefox and Chrome browsers   
-Server:   
-Java version: Oracle 8u91/8u92 or higher.
+Only tested with latest Firefox and Chrome browsers.  
+Java version: Oracle 8u91/8u92 or higher.  
 It's developed and tested with Windows 7. It's supposed to work with:
 * Mac OS X
 * Debian 7
