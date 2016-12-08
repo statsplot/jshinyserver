@@ -27,7 +27,7 @@ Ubuntu and Debian users can use this [PPA](http://www.webupd8.org/2014/03/how-to
 [Download]
 
 #### Config
-Move the downloaded file to a folder (e.g. `F:/shiny/`). Unzip the file.  
+Move the downloaded file to a folder (e.g. `D:\shiny\`). Unzip the file, move the folder `D:\shiny\{version}\source\Objects` to `D:\shiny\`, rename it if needed. This folder contains all the server files.  
 Go to the config folder, open `system_win.conf` with **plain** text editor(e.g., ultraedit, notepad++ ). You need to set rbin .  
 Note : File separator should be `/`  
 ```
