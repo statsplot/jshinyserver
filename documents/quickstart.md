@@ -18,7 +18,9 @@ If you are using other shiny versions from github or CRAN (>=0.14), see this [Ex
 ```   
 If proper Java version is missing, download Java 8 [JRE](https://www.java.com/en/download/manual.jsp) or JDK  ,and install and verify again.
 
-Ubuntu and Debian users can use this [PPA](http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html) to download and install Java 8(JDK which contains JRE)
+Ubuntu and Debian users can use this [PPA](http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html) to download and install Java 8(JDK which contains JRE)  
+
+You can download releases: https://github.com/statsplot/jshinyserver/releases or the latest (dev): https://github.com/statsplot/jshinyserver/archive/master.zip. The zip and tar.gz files contain the source codes and compiled server files (`source/Objects folder`). These server files can be used directly (Linux/Mac/Windows)  
 
  * [Windows](#windows)
  * [Linux/Mac](#linuxmac)
@@ -27,7 +29,12 @@ Ubuntu and Debian users can use this [PPA](http://www.webupd8.org/2014/03/how-to
 [Download]
 
 #### Config
-Move the downloaded file to a folder (e.g. `D:\shiny\`). Unzip the file, move the folder `D:\shiny\{version}\source\Objects` to `D:\shiny\`, rename it if needed. This folder contains all the server files.  
+Download the file and move it into a folder(e.g. /opt/shiny/download), extract the file. All the server files are in the folder `/opt/shiny/download/{version}/source/Objects`.  
+You can move all the files to the target directory (e.g. `/opt/shiny/server`) or create a soft link for this folder.  
+```
+ln -s  /opt/shiny/download/{version}/source/Objects /opt/shiny/server 
+```
+
 Go to the config folder, open `system_win.conf` with **plain** text editor(e.g., ultraedit, notepad++ ). You need to set rbin .  
 Note : File separator should be `/`  
 ```
