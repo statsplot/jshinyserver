@@ -10,6 +10,8 @@ It's developed and tested with Windows 7. It's supposed to work with:
 * Debian 8
 * Ubuntu 14.04 lts
 * Ubuntu 16.04 lts
+* CentOS 6.8
+* CentOS 7.2
 * Windows 7
 * Windows server 2012 R2
 
