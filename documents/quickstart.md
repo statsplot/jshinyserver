@@ -26,14 +26,10 @@ You can download releases: https://github.com/statsplot/jshinyserver/releases or
  * [Linux/Mac](#linuxmac)
 
 ### Windows
-[Download]
 
 #### Config
-Download the file and move it into a folder(e.g. /opt/shiny/download), extract the file. All the server files are in the folder `/opt/shiny/download/{version}/source/Objects`.  
-You can move all the files to the target directory (e.g. `/opt/shiny/server`) or create a soft link for this folder.  
-```
-ln -s  /opt/shiny/download/{version}/source/Objects /opt/shiny/server 
-```
+Download the file and move it into a folder(e.g. `D:\shiny`), extract the file. All the server files are in the folder `D:\shiny\{version}\source\Objects`.  
+You can move all the server files to the target directory (e.g. `D:\shiny\server`)
 
 Go to the config folder, open `system_win.conf` with **plain** text editor(e.g., ultraedit, notepad++ ). You need to set rbin .  
 Note : File separator should be `/`  
@@ -59,7 +55,12 @@ Or double click stop.bat (It will also stop the running R instances started by t
 
 
 #### Config
-Move the downloaded file to a folder with proper read and write permission (e.g. `/opt/shiny`). Untar the file.  
+Download the file and move it into a folder(e.g. /opt/shiny/download), extract the file. All the server files are in the folder `/opt/shiny/download/{version}/source/Objects`.  
+You can move all the server files to the target directory (e.g. `/opt/shiny/server`) or create a soft link for this folder.  
+```
+ln -s  /opt/shiny/download/{version}/source/Objects /opt/shiny/server 
+```
+
 Find absolute path of R bin. 
 ```
   which R
