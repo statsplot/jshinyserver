@@ -444,14 +444,14 @@ End Sub
 
 ' clear previous files after app runs : .script .input .error ( .pid excluded )	
 Private Sub ClearTmpFiles ( port_str  As String )		
-If isLogDebug Then
+If isLogDebug = False Then
 	FileUtils.File_DelFile_NameAndExtfilter(DirPids , port_str , File2ClearextMapAfterInit )
 End If
 End Sub
 
 ' clear previous files after app is killed : .script .input .error and .pid 	
 Private Sub ClearTmpFilesAll ( port_str  As String )		
-If isLogDebug Then
+If isLogDebug = False Then
 	FileUtils.File_DelFile_NameAndExtfilter(DirPids , port_str , File2ClearextMap )
 End If
 End Sub
