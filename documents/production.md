@@ -61,7 +61,7 @@ If a shiny app doesn’t work, you need to check the following logs:
 `logs/app_{appname}.log`  
 `logs/server_cmd.log`  
 `logs/server_output_{date time}.log`  
-If no information can be found in app/server logs, you should set loglevel=debug. See the detail in **loglevel** section of configuration document.
+If no information can be found in app/server logs, you should set loglevel=debug and shiny_sanitize_errors = false(for shiny version >=0.14), restart the server and run the app. Check `r_stdout.log`/`r_stdout.log`. See the detail in **loglevel** section of configuration document.  
 
 
 
