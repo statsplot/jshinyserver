@@ -22,7 +22,8 @@ else
   nohup java -Dfile.encoding=UTF-8 -jar server.jar >> logs/server_cmd.log 2>&1 &
 fi
 
-# wait for 7sec then check is the server is running
+echo "[Info] Server is starting ..."
+echo "[Info] Wait for a few seconds and check server status"
 sleep 7
 PID_SRV=`cat pid/server.pid`
 if [ -n "$(ps -p ${PID_SRV} -o pid=)" ] > /dev/null
