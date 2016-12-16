@@ -783,11 +783,13 @@ If iscontainVersion=True Then
 	Dim shinyver_Init As String = versionmap.GetDefault("init","")
 
 	Dim rep_str As String = $"<script>var _g_shinyver = "${shinyver}"; ${CRLF} var _g_shinyvermap = ${shinyverJsonStr}; ${CRLF} </script> <script src="/shared_mod/shiny.init_${shinyver_Init}.js"></script>"$
-#if stringReplace
+#if NOT (RegReplace)
 	str = str.Replace($"<script src="shared/shiny.min.js"></script>"$ , rep_str )
 	str = str.Replace($"<script src="shared/shiny.js"></script>"$ , rep_str )
+	str = str.Replace($"<script src='shared/shiny.min.js'></script>"$ , rep_str )
+	str = str.Replace($"<script src='shared/shiny.js'></script>"$ , rep_str )
 #else	
-	Dim regPat As String = $"<script ( |.)*?(src=["'](shared\/shiny(.min)?.js)["'])( |.)*?>( )*?<\/script>"$
+	Dim regPat As String = $"<script .*?(src=["'](shared\/shiny(.min)?.js)["']).*?>( )*?<\/script>"$
 	str = ReplacePattern(str,regPat,rep_str)
 #end if	
 	str = str.Replace($"script src="shared/"$,$"script src="/shared_${versionmap.GetDefault("sharedpath","")}/"$)

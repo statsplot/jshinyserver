@@ -21,3 +21,14 @@ else
   java -version || echo "Java not found"
   nohup java -Dfile.encoding=UTF-8 -jar server.jar >> logs/server_cmd.log 2>&1 &
 fi
+
+# wait for 5sec then check is the server is running
+PID_SRV=`cat pid/server.pid`
+sleep 5
+if [ -n "$(ps -p ${PID_SRV} -o pid=)" ] > /dev/null
+then
+   echo "[Info] jShiny server is running. PID is ${PID_SRV}"
+else
+   echo "[Error] jShiny server fail to start. Please check the logs"   
+fi
+

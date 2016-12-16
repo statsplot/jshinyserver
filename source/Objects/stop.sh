@@ -16,11 +16,11 @@ fi
 
 ## stop r instances
 if [ -f "../jre/bin/java" ]; then
-  ../jre/bin/java -Dfile.encoding=UTF-8 -jar server.jar "stopr" >> logs/server_stop_pre_r.log 2>&1
+  ../jre/bin/java -Dfile.encoding=UTF-8 -jar server.jar "stopr"
 elif [ -f "/opt/jre/bin/java" ]; then
-  /opt/jre/bin/java -Dfile.encoding=UTF-8 -jar server.jar "stopr" >> logs/server_stop_pre_r.log 2>&1
+  /opt/jre/bin/java -Dfile.encoding=UTF-8 -jar server.jar "stopr"
 else
-  java -Dfile.encoding=UTF-8 -jar server.jar "stopr" >> logs/server_stop_pre_r.log 2>&1
+  java -Dfile.encoding=UTF-8 -jar server.jar "stopr"
 fi
 
 ## stop the server

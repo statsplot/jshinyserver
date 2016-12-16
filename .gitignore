@@ -55,7 +55,9 @@ source/Objects/pid/
 source/Objects/logs/
 
 
-
+# test folder
+source/Objects/test/
 
 source/Objects/www/servertimestamp.html
+source/Objects/www/applist.html
 # source/Objects/server.jar

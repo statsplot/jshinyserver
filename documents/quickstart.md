@@ -3,10 +3,17 @@
 ### Prerequisites
 Install R and shiny package
 ```
-  # R code 
-  # check Shiny version 
-    library("shiny")
-    packageVersion("shiny")
+# R code
+## install current version
+install.packages("shiny", repos='http://cran.us.r-project.org')
+
+## install older version
+packageurl <- "https://cran.r-project.org/src/contrib/Archive/shiny/shiny_0.14.tar.gz"
+install.packages(packageurl, repos=NULL, type="source")
+
+# check Shiny version 
+library("shiny")
+packageVersion("shiny")
 ```
 Note that only shiny versions (CRAN) 0.12.0 - 0.14.2 are supported by jShiny server V0.94  
 If you are using other shiny versions from github or CRAN (>=0.14), see this [Experimental feature]
@@ -51,7 +58,7 @@ Close the command line Windows.
 Or double click stop.bat (It will also stop the running R instances started by the server.).
 
 ### Linux/Mac
-[Download]  or install with script: https://gist.github.com/statsplot/a2b2cad0e178906d28c99d60bdab36d8
+[Download]  or install with script: https://github.com/statsplot/jshinyserver/blob/master/ins_jshinyserver.sh
 
 
 #### Config
