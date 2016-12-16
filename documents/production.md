@@ -24,7 +24,7 @@ Note
 
 
 ### Configuration
-When the server run at low free memory or high system load, server will be less stable and the performance will be reduced.  
+When servers run at low free memory or high system load, they will be less stable and the performance will be reduced.  
 
 You should at least preserve enough physical memory, set threshold of free memory/cpu usage in config files. You may see a `server is too busy` page when the threshold exceeded. This can prevent jShiny server from been killed by OS.   
 
@@ -67,7 +67,7 @@ If a customized index page ({appname}/www/index.html) is used instead of ui.R, t
 It's the case for the demo app in RStudio Github repo `008-html` (`08_html` in shiny package)   
 	
   - **Customized resources are not loaded**  
-The URL patthern is `http://{ip}:{port}/shiny/{appname}/index.html` which is different from RStudio offical shiny server `http://{ip}:{port}/{appname}/index.html`   
+The URL patthern is `http://{ip}:{port}/shiny/{appname}/index.html` which is different from RStudio offical shiny server `http://{ip}:{port}/{appname}/`   
 If other resources(js/css/png) locate in `{appname}/www/` folder, make sure to refer them as a relative path to the `index.html`    
 
 
