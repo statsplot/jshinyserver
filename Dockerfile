@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-EXPOSE 8888
-
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV R_BASE_VERSION 3.3.2
@@ -9,6 +7,8 @@ ENV VER master
 ENV DL_TOOL wget
 ENV DL_PATH /opt/shiny/download/master
 ENV INS_PATH /opt/shiny
+
+
 
 # Install Java.
 RUN apt-get update && \
@@ -20,20 +20,13 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/oracle-jdk8-installer
 
-## Set a default user. Available via runtime flag `--user docker` 
-## Add user to 'staff' group, granting them write privileges to /usr/local/lib/R/site.library
-## User should also have & own a home directory (for rstudio or linked volumes to work properly). 
-RUN useradd docker && \
-    mkdir /home/docker && \
-    chown docker:docker /home/docker && \
-    addgroup docker staff
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ed \
         less \
         locales \
-        vim-tiny \
+        nano \
         wget \
         ca-certificates \
         apt-transport-https \
@@ -75,13 +68,14 @@ RUN mkdir -p ${DL_PATH} && \
       tar zxf ${DL_PATH}/${VER}.tar.gz -C ${DL_PATH} && \
       ln -s  ${DL_PATH}/jshinyserver-*/source/Objects ${INS_PATH}/server && \
       mkdir -p ${INS_PATH}/server/logs ${INS_PATH}/server/pid && \
-      cp -R /usr/local/lib/R/site-library/shiny/examples/* ${INS_PATH}/server/shinyapp && \
       echo "[Done] jShiny server ${VER} installed to ${INS_PATH}/server"
 
-RUN echo '#!/bin/sh\nsu -c "/bin/sh ${INS_PATH}/server/start.sh ${INS_PATH}/server && tail -f ${INS_PATH}/server/logs/server_cmd.log" docker ' >> /usr/bin/shiny-server.sh && \
-      touch ${INS_PATH}/server/config/applist.update && \
-      chown -R docker:docker ${INS_PATH}/server/* /usr/bin/shiny-server.sh && \
-      chmod -R 700 ${INS_PATH}/server/* /usr/bin/shiny-server.sh
+RUN rm -f ${DL_PATH}/${VER}.tar.gz
+RUN touch ${INS_PATH}/server/config/applist.update
 
-# Define default command.
-CMD ["/usr/bin/shiny-server.sh"]
+EXPOSE 8888
+
+WORKDIR ${INS_PATH}/server
+	
+CMD ["java","-jar","server.jar"]
+
