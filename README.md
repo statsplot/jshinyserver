@@ -28,7 +28,11 @@
   [Download jShiny Server]
   
 ### Docker
-  Clone or download this repo and then build the images with
+  Use the image in docker hub :  
+```  
+docker run -d -p 8888:8888 --name shinyserver statsplot/jshinyserver:latest  
+```
+  Or clone/download this repo and then build the images with
   
 ```bash
 git clone https://github.com/statsplot/jshinyserver.git
@@ -37,13 +41,16 @@ docker build --tag yourname/jshinyserver .
 docker run -d -p 8888:8888 --name shinyserver yourname/jshinyserver
 ```
 
-And then visit http://127.0.0.1:8888/applist.html for the list of Shiny apps.
+And then visit http://127.0.0.1:8888/applist.html for the list of Shiny apps.  
 
 Add your apps to the server with `docker -v` option. See also [Html pages and shiny app folder],
 
 ```bash
 docker run -d -p 8888:8888 --name shinyserver -v /path/to/yourapps:/opt/shiny/server/shinyapp yourname/jshinyserver
 ```
+
+See `Deploy with docker` in [Production deployment and troubleshooting] for more details.   
+
 
 ### Change logs
 * [Change logs] 

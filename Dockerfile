@@ -9,7 +9,6 @@ ENV DL_PATH /opt/shiny/download/master
 ENV INS_PATH /opt/shiny
 
 
-
 # Install Java.
 RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common && \
@@ -73,6 +72,39 @@ RUN mkdir -p ${DL_PATH} && \
 RUN rm -f ${DL_PATH}/${VER}.tar.gz
 RUN touch ${INS_PATH}/server/config/applist.update
 
+
+## in case you need to mount folders to /opt/shiny as non-root user
+RUN chmod -R 777 ${INS_PATH}
+
+
+## https://hub.docker.com/r/rocker/r-apt/~/dockerfile/
+## ---- change user 'docker' to 'ruser'. 
+## ---- docker.docker in the host has access to docker daemon 
+
+## Set a default user. Available via runtime flag `--user ruser` 
+## Add user to 'staff' group, granting them write privileges to /usr/local/lib/R/site.library
+## User should also have & own a home directory (for rstudio or linked volumes to work properly). 
+RUN useradd ruser \
+	&& mkdir /home/ruser \
+	&& chown ruser:ruser /home/ruser \
+	&& addgroup ruser staff
+
+
+## By default, docker daemon starts container with root(superuser)
+## Superuser inside a container don't get all the Linux capabilities
+## Most of the time, it's safe to run with superuser
+
+## Run as non-root 'ruser' with  'docker run -u ruser:ruser ...'
+## In the host the user 'ruser'(in 'ruser' group) should exist.
+
+## Run as 'ruser' inside container, when you mount host folders/files,
+## if you need to execute/access/read/write/create/delete to a folder/file, 
+## 'ruser' in the host should has corresponding privileges to it
+## and access to its parent folders. 
+## Remember that inside the container, non-root user can't access to all
+## the files/folders or execute commands which need root privileges.
+
+	
 EXPOSE 8888
 
 WORKDIR ${INS_PATH}/server

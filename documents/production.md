@@ -46,8 +46,55 @@ You can also check server health with http GET requests to `http://{ip/domain}:{
 All the file in `www` folder can be accessed by clients by default. Sensitive files should NOT be included in this folder.
   
   - **SSL**  
-B4J HTTP server (Jetty) supports SSL, however the configuration differ from different Java versions. This feature will not be added soon.   
-Recommend to run this server behind a reverse proxy(ex Nginx) which handles the SSL.
+B4J HTTP server (Jetty) supports SSL [B4J Server SSL], this feature will not be added soon.   
+Recommend to run this server behind a reverse proxy(ex Nginx) which handles the SSL.  
+
+  - **Run as non-root user**  
+You can run jShiny server as root or non-root user, and shiny apps run in R instances owned by the same user.  
+
+It's a good practice to run it as a non-root user, but this may cause permission issues when manipulating files/folders or executing external tasks.   
+ 
+Add a user `ruser`(in `ruser` group).  
+```
+useradd ruser && mkdir /home/ruser && chown -R ruser:ruser /home/ruser
+```
+In Ubuntu/Debian systems, add `ruser` to `staff` group. This will grante `ruser` write privileges to `/usr/local/lib/R/site.library` without the use of `sudo`   
+```
+addgroup ruser staff
+```
+
+
+When running as a non-root user `ruser`, make sure `ruser` has privileges to access jShiny server folders/files, tmp folders (TmpDir in server log) or any related files/folders.   
+```
+## change owner to ruser
+INS_PATH=/opt/shiny
+TmpDir=/tmp/rshiny
+sudo chown -R ruser:ruser ${INS_PATH}
+## if TmpDir exists
+sudo chown -R ruser:ruser ${TmpDir}
+```
+A reverse proxy can be used to forward requests from ports below 1024 to jShiny server.  
+
+
+
+  - **Deploy with docker**   
+1) non-root user inside container   
+By default, docker daemon starts container with root(superuser). Superuser/non-root inside a container don't get all the [Linux capabilities] as superuser in the host. Most of the time it's safe to run with superuser.  
+
+It's a good practice to run as non-root (the same as running in the host). When starting a container, [specify non-root user] by   
+```
+docker run -u ruser:ruser ...
+```
+In the host the user `ruser`(in `ruser` group) should exist. A corresponding  user `ruser`(in `ruser` group) is created in Dockerfile. See comments in Dockerfile for more information.      
+
+
+2)  Set Linux capabilities   
+[Linux capabilities] provide fine-grained access control.  
+
+3) containers inside VMs   
+[Docker] containers(like OpenVZ,LXC) are not virtual machines(VMs), they share kernel with the host. If untrusted users can control containers (or run arbitrary code), it's recommended to run docker containers inside VMs.   
+
+[Read more about docker security]    
 
 
 ### Troubleshooting
@@ -107,3 +154,11 @@ b  Server logs  `logs/server_cmd.log` or `logs/server_output_{date time}.log`
 c  Shiny app source code if possible   
 d  If any other app is not working, attach related files.   
 
+
+
+
+[B4J Server SSL]: https://www.b4x.com/android/forum/threads/server-ssl-connections.40130/#content
+[Docker]: https://www.docker.com/
+[Linux capabilities]:https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[specify non-root user]: https://docs.docker.com/engine/reference/run/#/user
+[Read more about docker security]:https://docs.docker.com/engine/security/

@@ -1,10 +1,17 @@
 #!/bin/sh
+
+## ---- To run this script with non-root 'ruser', need to set permssions for 'INS_PATH' folder first (as root or sudoers). 
+## ---- Create user if not exist
+## ---- useradd ruser && mkdir /home/ruser && chown -R ruser:ruser /home/ruser
+## ---- INS_PATH=/opt/shiny && sudo mkdir -p ${INS_PATH} && sudo chown -R ruser:ruser -R ${INS_PATH}
+
 # $1 VER version number,  master(defualt) or release tag 
 # $2 DL_TOOL: wget or curl(defualt) 
 # ---
 # server is installed to /opt/shiny/server
 # previous files/folders are moved to another place and will not be removed
 # remember to set files/folders permssions if needed
+
 
 # VER="master"
 # VER="v0.94-beta.4"
@@ -19,8 +26,8 @@ if [ "${VER}" = "" ]; then
     VER="master"
 fi
 
-INS_PATH=/opt/shiny
 
+INS_PATH=/opt/shiny
 DL_PATH=${INS_PATH}/download/${VER}
 
 
@@ -68,5 +75,3 @@ fi
 
 cd ${INS_PATH}
 
-## set permissions
-# chmod -R 700 ${INS_PATH}/server/*
