@@ -87,7 +87,7 @@ mac: nano ${INS_PATH}/server/config/system_mac.conf
 ```
 #### Start the server
 
-Open a new terminal. 
+In terminal   
 ```
 INS_PATH=/opt/shiny
 # first argument should be the absolute path to the server folder,  if not provided default value (`/opt/shiny/server`) will be used

@@ -8,14 +8,14 @@ It's developed and tested with Windows 7. It's supposed to work with:
 * Mac OS 10.9
 * Debian 7
 * Debian 8
-* Ubuntu 14.04 lts
-* Ubuntu 16.04 lts
+* Ubuntu 14.04 LTS
+* Ubuntu 16.04 LTS
 * CentOS 6.8
 * CentOS 7.2
 * Windows 7
 * Windows server 2012 R2
 
-Recommended OS: Ubuntu 14.04 lts, Ubuntu 16.04 lts, Windows 7 and Windows server 2012 R2.  
+Recommended OS: Ubuntu 14.04 LTS, Ubuntu 16.04 LTS, Windows 7 and Windows server 2012 R2.  
 
 
 Note 
@@ -77,8 +77,8 @@ A reverse proxy can be used to forward requests from ports below 1024 to jShiny 
 
 
 
-  - **Deploy with docker**   
-1) non-root user inside container   
+### Deploy with docker   
+  - **non-root user inside container**  
 By default, docker daemon starts container with root(superuser). Superuser/non-root inside a container don't get all the [Linux capabilities] as superuser in the host. Most of the time it's safe to run with superuser.  
 
 It's a good practice to run as non-root (the same as running in the host). When starting a container, [specify non-root user] by   
@@ -88,10 +88,10 @@ docker run -u ruser:ruser ...
 In the host the user `ruser`(in `ruser` group) should exist. A corresponding  user `ruser`(in `ruser` group) is created in Dockerfile. See comments in Dockerfile for more information.      
 
 
-2)  Set Linux capabilities   
-[Linux capabilities] provide fine-grained access control.  
+  - **Set Linux capabilities**  
+[Linux capabilities] provide fine-grained control, drop all capabilities except those needed.  
 
-3) containers inside VMs   
+  - **containers inside VMs**   
 [Docker] containers(like OpenVZ,LXC) are not virtual machines(VMs), they share kernel with the host. If untrusted users can control containers (or run arbitrary code), it's recommended to run docker containers inside VMs.   
 
 [Read more about docker security]    
