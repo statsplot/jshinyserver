@@ -41,8 +41,8 @@ RUN mkdir -p /srv/shiny-server && \
     unzip -x master.zip && \
     mv shiny-examples-master shiny-server && \
     rm master.zip && \
-	rm -r /srv/shiny-server/docker && \
-	echo shinyfolder=/srv/shiny-server >> /opt/shiny/server/config/system_linux.conf
+    rm -r /srv/shiny-server/docker && \
+    echo shinyfolder=/srv/shiny-server >> /opt/shiny/server/config/system_linux.conf
 
 # Autodetect packages needed for the examples (will install from CRAN)
 RUN R -e "install.packages(packrat:::dirDependencies('/srv/shiny-server'))"

@@ -71,13 +71,13 @@ limit1 : threshold for starting new R process.
 limit2 : threshold for new websocket connection to existing R process  
 
   - **shiny_sanitize_errors**  
-sanitize_errors options added in shiny 0.14. set it true to enable it. possible value: true/false
+sanitize_errors options added in shiny 0.14. set it true to enable it. Possible value: true/false. Default value is true, this will make the exact error messages not shown in the logs.  
 
   - **loglevel**  
 set loglevel=debug to save extra error/warning messages (R logs) of R session to `r_stdout.log` and `r_stdout.log` files. These messages are supposed to be logged into app/server logs. If one app doesn’t work properly and no information can be found in app/server logs, you should set loglevel=debug, restart the server, run the app and check these R logs. These logs may grow very fast, the default value is false possible value: debug/error
 
   - **lc_all**
-Only need to set this if characters are not display properly, it’s default value is an empty string
+Only need to set this if characters are not display properly, default value is an empty string
 ```
 Sys.setlocale( category = "LC_ALL", locale = lc_all )
 ```

@@ -47,7 +47,7 @@ All the file in `www` folder can be accessed by clients by default. Sensitive fi
   
   - **SSL**  
 B4J HTTP server (Jetty) supports SSL [B4J Server SSL], this feature will not be added soon.   
-Recommend to run this server behind a reverse proxy(ex Nginx) which handles the SSL.  
+Recommend to run this server behind a reverse proxy(e.g., Nginx) which handles the SSL.  
 
   - **Run as non-root user**  
 You can run jShiny server as root or non-root user, and shiny apps run in R instances owned by the same user.  
@@ -92,7 +92,7 @@ In the host the user `ruser`(in `ruser` group) should exist. A corresponding  us
 [Linux capabilities] provide fine-grained control, drop all capabilities except those needed.  
 
   - **containers inside VMs**   
-[Docker] containers(like OpenVZ,LXC) are not virtual machines(VMs), they share kernel with the host. If untrusted users can control containers (or run arbitrary code), it's recommended to run docker containers inside VMs.   
+[Docker] containers(like LXC) are not virtual machines(VMs), they share kernel with the host. If untrusted users can control containers (or run arbitrary code), it's recommended to run docker containers inside VMs.   
 
 [Read more about docker security]    
 
@@ -132,7 +132,7 @@ See the detail in **loglevel** section of configuration document.
 3) Run this shiny app from R(command line) manually on the host where the server is running, to see if it works.  
 ```
 library("shiny")
-# set working directory to the shinyapp folder, which shiny app folder(ex shinyappname) is in   
+# set working directory to the shinyapp folder, which shiny app folder(e.g., shinyappname) is in   
 setwd("/opt/shiny/server/shinyapp/")
 # run shiny app, port number is 9999
 runApp(appDir ="shinyappname" ,port=9999,launch.browser = FALSE ,display.mode = "normal" ,host="0.0.0.0")

@@ -119,7 +119,7 @@ Sub File_CreateSubFolder(currentFolder As String ,  subfoldername As String ) As
 	
 End Sub
 
-Sub File_CreateFolderIfNotExsit(parentFolder As String ,  subfoldername As String ) As String
+Sub File_CreateFolderIfNotExsit(parentFolder As String ,  subfoldername As String )
 	If File.Exists(parentFolder,subfoldername)=False Then
 		File.MakeDir(parentFolder, subfoldername)
 	End If

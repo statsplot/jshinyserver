@@ -495,7 +495,7 @@ Public Sub printSystemInformation
 	DateTime.DateFormat="yyyy-MM-dd"
  	DateTime.TimeFormat="HH:mm:ss"	
 	Log($"Time = ${DateTime.Date(DateTime.Now)} ${DateTime.Time(DateTime.Now)} UTC"$)	
-	Log($"Serverversion = ${Main.ShinyServerVersion}-${Main.ShinyServerVersion_Minor}"$)
+	Log($"Serverversion = ${Main.ShinyServerVersion}"$)
 	Dim NativeMe As JavaObject
 	NativeMe = Me
 	Dim SystemInfoMap As Map = NativeMe.RunMethod("getSystemInfomation", Null)
@@ -544,6 +544,7 @@ import anywheresoftware.b4a.objects.collections.Map;
 	m.Put("Java", System.getProperty("java.version"));
 	m.Put("JavaVendor", System.getProperty("java.vendor"));
 	m.Put("JavaRuntime", System.getProperty("java.runtime.version"));
+	m.Put("JVMName", System.getProperty("java.vm.name"));
 	m.Put("Processors", Runtime.getRuntime().availableProcessors() );
 	
 	OperatingSystemMXBean localOSB = (OperatingSystemMXBean)ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
@@ -1090,31 +1091,6 @@ public Sub StringIndexOfNth(str As String, targetchar As Char , nth As Int) As I
 	Return -1
 End Sub
 
-
-'port from getContentTypeByExt  
-' no ToLowerCase
-'not found ""
-'NOTE: input must be URL-encoded 
-Sub getUrlExt(filename As String) As String
-	'filename = filename.ToLowerCase.Trim
-	filename = filename.Trim
-	'Dim default As String = "application/octet-stream"
-	' http//ip:port/x/y/z.js?k=v
-	' http//ip:port/x/y/z?k=v
-	Dim lastindexquery As Int = filename.LastIndexOf("?")
-	Dim lastindexext As Int = filename.LastIndexOf(".")
-	If lastindexquery>0 And lastindexquery>lastindexext Then
-		filename = filename.SubString2(0,lastindexquery)
-	End If
-	
-	If filename.Contains(".") = False Or ( lastindexext = filename.Length ) Then 
-		Return ""
-	End If
-	
-	Dim ext As String = filename.SubString( filename.LastIndexOf(".") + 1 )
-
-	Return ext.Trim
-End Sub
 
 
 '/x/y/z.js?k=v -> /z.js
