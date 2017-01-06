@@ -1,4 +1,4 @@
-﻿Version=4.2
+﻿Version=4.7
 AppType=StandardJava
 NumberOfModules=10
 Module1=wsRelayHandler
@@ -30,14 +30,14 @@ Library12=okhttp
 'Non-UI application (console / server application)
 #Region  Project Attributes 
 	#CommandLineArgs: 
-	#MergeLibraries: True	
+	#MergeLibraries: False	
 	#VirtualMachineArgs: -XX:NativeMemoryTracking=detail -Dfile.encoding=UTF-8
 #End Region
 
 #AdditionalJar: javasysmon-0.3.4-jdk8
 
 Sub Process_Globals
-	Public ShinyServerVersion As String = "v0.94"	
+	Public ShinyServerVersion As String = "v0.95-beta.2"	
 	
 	
 	Public srvr As Server
@@ -129,8 +129,17 @@ Sub AppStart (Args() As String)
 	srvr.port = srvrPort
 	srvr.DebugNetworkLatency = 200
 	srvr.LogsRetainDays=10	
-	comFunMod.Server_setStaticAndErrorpages(srvr)	
-						
+	comFunMod.Server_setStaticAndErrorpages(srvr)
+	
+	'Try to set GzipEnabled (jServer 2.70+) and print sha1 of server.jar 
+	Try
+		srvr.GzipEnabled = True
+		Dim Hash_str As String = comFunMod.getFileHash(File.DirApp,"server.jar","SHA-1")	
+		Log($"server.jar sha1 = ${Hash_str}"$)
+	Catch
+		'Log(LastException)
+	End Try
+					
 	srvr.Start
 		
 	comFunMod.LogFmt("info", "", $" Server started ============ "$)

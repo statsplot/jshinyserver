@@ -1,5 +1,5 @@
 ﻿Type=Class
-Version=4.2
+Version=4.7
 ModulesStructureVersion=1
 B4J=true
 @EndOfDesignText@
@@ -323,7 +323,12 @@ End Try
 		resp.CharacterEncoding = "utf-8"
 		If req.GetParameter("__subws__") = "" Then		
 			Dim subappQS As String = comFunMod.URL_RmdSubQS(FULLURI_WID_REMOVED,nTH_SLASH_APPFN+1)
-			resp.SendRedirect($"${FULLURI}&__app__=${comFunMod.URL_Encode(appFolderName)}&__w__=${comFunMod.URL_Encode(confmap2.GetDefault("workerid",""))}&${subappQS}"$)			 		
+ 
+			'Redirect to http:// will cause "mixed content" when running behind Nginx with https
+			'use RemoteAddr + relative URL(with query string)	 instead of FULLURI 
+			Dim RemoteAddr As String = getRemoteAddr(req)
+
+			resp.SendRedirect($"${RemoteAddr}${FULLURI.SubString(comFunMod.StringIndexOfNth(FULLURI, "/", 3)	)}&__app__=${comFunMod.URL_Encode(appFolderName)}&__w__=${comFunMod.URL_Encode(confmap2.GetDefault("workerid",""))}&${subappQS}"$)			 		
 			Return
 		End If												
 	Else If isIndex=True Then
@@ -417,8 +422,8 @@ End Try
 	'http request finished / timeout. continue 
 #if not(debugmacos)
 	If (enableETag=True) And (requestType = "others") And (requestMethod = "get") Then
-		'comFunMod.LogFmt("debug", "", $" [Etag---] ${linkstr} "$)
-		If (newHash<>"") And (newHash=previousHash) Then
+		'comFunMod.LogFmt("error", "", $" [Etag---] ${linkstr} ${newHash} ${previousHash} "$)
+		If (newHash<>"") And isEtagIdentical(newHash,previousHash) Then
 		'resource hash not changed return 304	
 			resp.Status = 304					
 		End If
@@ -480,7 +485,7 @@ Sub JobDone(Job As HttpJob)
 			If newHash<>""  Then
 				'Etag not match need to set new one and write body
 				
-				If (newHash <> previousHash) Then
+				If Not(isEtagIdentical(newHash,previousHash)) Then
 					
 					'http://stackoverflow.com/questions/16532728/how-do-i-send-an-http-response-without-transfer-encoding-chunked					
 					mResp.SetHeader("ETag",newHash)
@@ -563,5 +568,31 @@ End Sub
 
 
 
+'return "" if X-Forwarded-Proto or X-Forwarded-Host is not set
+'return http(s)://hostname{:port}  (port is optional)
+Sub getRemoteAddr(req As ServletRequest) As String
+	Dim RemoteAddr As String = ""		
+	Dim RemoteSch As String = ""
+	If req.GetHeader("X-Forwarded-Proto")="https" Then
+		RemoteSch = "https"
+	End If
+	Dim RemoteDomain As String = ""
+	If req.GetHeader("X-Forwarded-Host") <> "" Then
+		RemoteDomain = req.GetHeader("X-Forwarded-Host")
+	End If
+	
+	
+	Dim RemotePort As String = req.GetHeader("X-Forwarded-Port")
+	If RemoteSch<>"" And RemoteDomain<>"" Then
+		RemoteAddr = RemoteSch & "://" & RemoteDomain		
+		If RemotePort<>"" Then 	RemoteAddr = RemoteAddr & ":" & RemotePort
+	End If	
+	
+	Return RemoteAddr
+End Sub
 
-
+' requirement : NewETag is not empty
+Sub isEtagIdentical(NewETag As String, PreviousETag As String) As Boolean
+	'If NewETag="" Then Return False
+	Return (NewETag = PreviousETag Or NewETag&"--gzip"=PreviousETag)
+End Sub

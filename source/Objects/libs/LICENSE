@@ -1,0 +1,83 @@
+## Libraries
+### B4J 4.70 internal libs (some are updated)
+JavaObject 2.05 
+jCore   4.70
+jNetwork  1.20
+jRandomAccessFile 2.20
+jServer  2.70  (Updated)
+jShell  1.30
+Json  1.10
+jStringUtils 1.00
+jWebSocketClient 1.00
+okhttp 1.01
+
+### Additional libs  (in Additional libraries folder. This folder has lower priority than the internal libs folder)
+ByteConverter 1.10  (ByteConverter.jar ByteConverter.xml)
+Encryption 1.10     Encryption.jar Encryption.xml
+javasysmon   0.3.4  javasysmon-0.3.4-jdk8.jar
+
+Note jServer 2.70 is a updated version than the one in B4J 4.70 internal libs. Need to copy jServer.jar and jServer.xml to the internal (overwrite the exsiting ones)
+
+## Opensource projects used in this project.
+
+ByteConverter
+https://www.b4x.com/android/forum/threads/byteconverter-library.6787/#content
+
+Encryption 
+https://www.b4x.com/android/forum/threads/base64-and-encryption-library.6839/
+
+ByteConverter and Encryption are wrappers made by Andrew Graham https://www.b4x.com/android/forum/members/agraham.448/
+
+
+jShell
+Wrapper of https://commons.apache.org/exec/
+Apache License 2.0
+
+jServer and jWebSocketClient
+Wrappers of Jetty http://www.eclipse.org/jetty/
+Apache License 2.0
+
+javasysmon
+javasysmon-0.3.4-jdk8.jar (javasysmon complied against JDK 8)
+https://github.com/jezhumble/javasysmon
+JavaSysMon uses the NetBSD (2-line) license. Copyright 2009 ThoughtWorks, Inc.
+
+
+
+
+## SHA-1 for the files
+ByteConverter.jar	25A7AA27D159E1B4EFA9623458730E9BECF48BBC
+ByteConverter.xml	6FC14015920DF49E5A400DF28E9D133E1969B928
+c3p0-0.9.2.1.jar	3A4CCCB236ABF5541E184DA5AA7C4B99D5F6EBAD
+c3p0-license.txt	01A6B4BF79ACA9B556822601186AFAB86E8C4FBF
+c3p0-oracle-thin-extras-0.9.2.1.jar	9984859808DC4C80DC2CBA600E7C3873E8C7312A
+Encryption.jar	423D45F92ACAC4D55D2EA85AC0A0668E443932C5
+Encryption.xml	7F2332FEC03F411AFC1BB4FC93DDAFA8750ADD7D
+JavaObject.jar	E99EF3147F3CC42B66799D136D5385231F3909E8
+JavaObject.xml	10082B122AB369A3DF029B04DEACF3873BCA937D
+javasysmon-0.3.4-jdk8.jar	47DE76AFD27D4E0BE7049951F5E524344472FA28
+jCore.jar	CFEB370B6C6EFD425D03F5A97CF224A4764E5F68
+jCore.xml	038BE3F878166673E460A8151AF8FB779158A32D
+jetty-license.txt	9EEB6F357398FA83B1A66EC89CF2959C59B44086
+jetty_b4j.jar	E6295660215FB244A3D33448A433C07371DD48E1
+jNetwork.jar	22C9CF9912E44773C3883B5C8BF64F6E5836CDFC
+jNetwork.xml	105C4288F016230150CBB608E1433AE6610B3D6F
+jRandomAccessFile.jar	FB929F7AB85AA8D9A370C85A156A7A78F78C7BA6
+jRandomAccessFile.xml	51E5BDFC998C21A0FF75E61D001A470DBEF50E7E
+jServer.jar	D290D20B40E1E3E8249A0A060F6AC1D96249800C
+jServer.xml	43E19B102DDC7728088CB261DD5F1634C9992D42
+jShell.jar	CA584B3B5D309F716386B60A1CA0BBDB80D446F4
+jShell.xml	F228FDB46939BD13D6E9E83A88CF5A1170DC42DD
+Json.jar	C577FBDAD0E83A8620F20143F6A64A2C4AEF1F54
+Json.xml	38E32B664677A9ABD60495FC2300D0486DDBEE3B
+jStringUtils.jar	12DD01C793DBCEE6F2BE40E38A1A2B3C7127A77A
+jStringUtils.xml	40ACE6766CB4FB84315486869A3833C0D513D9D1
+jWebSocketClient.jar	B227F34C090FDE15E49C6D8580A773C279F7CBB2
+jWebSocketClient.xml	3AFBC05A9313EA309D43180E25821FE95DDF66B2
+mchange-commons-java-0.2.3.4.jar	5EB5A801D96F65912BCF418A831FA23C663B029B
+okhttp-2.4.0.jar	40340C0748190FE897BAF7BFFBC1B282734294E5
+OkHttp.jar	68BFD184F78A0CCBBC792506333657B831396F6F
+OkHttp.xml	E94E48BF2E361BCA254DB8AE7570E6F0E117BC94
+okio-1.4.0.jar	5B72BF48563EA8410E650DE14AA33FF69A3E8C35
+servlet-api-3.1.jar	3CD63D075497751784B2FA84BE59432F4905BF7C
+

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.04</doclet-version-NOT-library-version>
+    <class>
+        <name>anywheresoftware.b4a.objects.StringUtils</name>
+        <shortname>StringUtils</shortname>
+        <comment>Collection of strings related functions.
+The &lt;link&gt;Table example|http://www.basic4ppc.com/forum/basic4android-getting-started-tutorials/6946-creating-table-view-based-scrollview.html&lt;/link&gt; uses LoadCSV to show the data in a table.</comment>
+        <owner>process</owner>
+        <method>
+            <name>DecodeBase64</name>
+            <comment>Decodes data from Base64 notation.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>Data</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>EncodeBase64</name>
+            <comment>Encodes the given bytes array into Base64 notation.
+Example:&lt;code&gt;
+Dim su As StringUtils
+Dim encoded As String
+encoded = su.EncodeBase64(data) 'data is a bytes array&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Data</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SaveCSV</name>
+            <comment>Saves the table as a CSV file.
+Dir - Output file folder.
+FileName - Output file name.
+SeparatorChar - Separator character. The character that separates fields.
+Table - A List with arrays of strings as items. Each array represents a row. All arrays should be of the same length.
+Example:&lt;code&gt;
+Dim su As StringUtils
+su.SaveCSV(File.DirRootExternal, "1.csv", ",", table)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SeparatorChar</name>
+                <type>char</type>
+            </parameter>
+            <parameter>
+                <name>Table</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DecodeUrl</name>
+            <comment>Decodes an application/x-www-form-urlencoded string.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Url</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>CharSet</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SaveCSV2</name>
+            <comment>Similar to SaveCSV. Will save the headers list as the first row. This should be a list (or array) of strings.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SeparatorChar</name>
+                <type>char</type>
+            </parameter>
+            <parameter>
+                <name>Table</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+            <parameter>
+                <name>Headers</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>EncodeUrl</name>
+            <comment>Encodes a string into application/x-www-form-urlencoded format.
+Url - String to encode.
+CharSet - The character encoding name.
+Example:&lt;code&gt;
+Dim su As StringUtils
+Dim url, encodedUrl As String
+encodedUrl = su.EncodeUrl(url, "UTF8")&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Url</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>CharSet</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>LoadCSV2</name>
+            <comment>Similar to LoadCSV. Will load the first row to the headers list.</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.List</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SeparatorChar</name>
+                <type>char</type>
+            </parameter>
+            <parameter>
+                <name>Headers</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>LoadCSV</name>
+            <comment>Loads a CSV file and stores it in a list of string arrays.
+Dir - CSV file folder.
+FileName - CSV file name.
+SeparatorChar - The character used to separate fields.
+Example:&lt;code&gt;
+Dim su As StringUtils
+Dim Table As List
+Table = su.LoadCSV(File.DirAssets, "1.csv", ",")&lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.List</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SeparatorChar</name>
+                <type>char</type>
+            </parameter>
+        </method>
+    </class>
+    <version>1.0</version>
+</root>

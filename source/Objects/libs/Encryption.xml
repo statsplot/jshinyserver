@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.00</doclet-version-NOT-library-version>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper</name>
+        <shortname>Cipher</shortname>
+        <comment>This object  provides the functionality of a secret (symmetric) key encryptor and
+decryptor. The algorithms may commonly be one of the following, there are others not listed here.
+
+AES also known as Rijndael is a 128-bit block cipher supporting keys of 128, 192, and 256 bits.
+DES The Digital Encryption Standard as described in FIPS PUB 46-3.
+DESede Triple DES Encryption (also known as DES-EDE, 3DES, or Triple-DES).</comment>
+        <owner>process</owner>
+        <method>
+            <name>Decrypt</name>
+            <comment>Encrypts the supplied data using the key provided. If an initialisation vector is
+to be used then useIV should be set True and the InitialisationVector property set
+to the required data.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>key</name>
+                <type>java.security.Key</type>
+            </parameter>
+            <parameter>
+                <name>useIV</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize</name>
+            <comment>Initialises the Cipher object to perform the supplied transformation.
+ 
+A transformation is a string that describes the operation (or set of operations) to be performed
+on the given input to produce some output. A transformation always includes the name of a
+cryptographic algorithm (e.g., DES), and may be followed by a mode and padding scheme.
+
+A transformation is of the form "algorithm/mode/padding" or "algorithm".
+For example, the following are valid transformations:
+"DES/CBC/PKCS5Padding"
+"DES" note that this is actually a synonym for "DES/ECB/PKCS5Padding".
+"DES/ECB/NoPadding" use this for simple single block encoding.
+
+Algorithm may commonly be one of the following, there are others not listed here.
+AES also known as Rijndael is a 128-bit block cipher supporting keys of 128, 192, and 256 bits.
+DES The Digital Encryption Standard as described in FIPS PUB 46-3.
+DESede Triple DES Encryption (also known as DES-EDE, 3DES, or Triple-DES).
+
+Mode may commonly be one of the following, there are others not listed here.
+NONE No mode.
+CBC Cipher Block Chaining Mode, as defined in FIPS PUB 81.
+CFB, CFBx Cipher Feedback Mode, as defined in FIPS PUB 81.
+ECB Electronic Codebook Mode, as defined in FIPS PUB 81. 
+OFB, OFBx Output Feedback Mode, as defined in FIPS PUB 81.
+Using modes such as CFB and OFB, block ciphers can encrypt data in units smaller than
+ the cipher's actual block size. When requesting such a mode, you may optionally specify the
+ number of bits to be processed at a time by appending this number to the mode name as shown
+ in the "DES/CFB8/NoPadding" and "DES/OFB32/PKCS5Padding" transformations. If no such
+ number is specified, a provider-specific default is used. Thus block ciphers can be turned into
+ byte-oriented stream ciphers by using an 8 bit mode such as CFB8 or OFB8.
+  
+Padding may be one of
+NoPadding 
+ISO10126Padding
+PKCS1Padding The padding scheme described in PKCS1, used with the RSA algorithm.
+PKCS5Padding The padding scheme described in RSA Laboratories, "PKCS5: version 1.5, November 1993.
+SSL3Padding The padding scheme defined in the SSL Protocol Version 3.0, November 18, 1996,
+ section 5.2.3.2 (CBC block cipher):</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>transformation</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetAlgorithms</name>
+            <comment>Returns an array of strings containing the algorithms that the specified security
+provider implements.</comment>
+            <returntype>java.lang.String[]</returntype>
+            <parameter>
+                <name>servicename</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Encrypt</name>
+            <comment>Decrypts the supplied data using the key provided. If an initialisation vector is
+to be used then useIV should be set True and the InitialisationVector property set
+to the required data.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>key</name>
+                <type>java.security.Key</type>
+            </parameter>
+            <parameter>
+                <name>useIV</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetServices</name>
+            <comment>Returns an array of strings containing the security providers present on the system.</comment>
+            <returntype>java.lang.String[]</returntype>
+        </method>
+        <property>
+            <name>InitialisationVector</name>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>iv</name>
+                <type>byte[]</type>
+            </parameter>
+            <comment>Gets or sets the initialisation vector array.</comment>
+        </property>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper.MessageDigestWrapper</name>
+        <shortname>MessageDigest</shortname>
+        <comment>Message digests are used to produce unique and reliable identifiers of data.
+They are sometimes called "checksums" or the "digital fingerprints" of the data.
+Changes to just one bit of the message should produce a different digest value.
+
+Algorithm can be "MD2", "MD5", "SHA-1", "SHA-256", "SHA-384" or "SHA-512".</comment>
+        <owner>process</owner>
+        <method>
+            <name>GetMessageDigest</name>
+            <comment>Returns a byte array containing the message digest of the contents of the supplied
+array if bytes using the specified algorithm.
+Algorithm can be "MD5", "SHA-1", "SHA-224", "SHA-256", "SHA-384" or "SHA-512"</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>algorithm</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper.SecureRandomWrapper</name>
+        <shortname>SecureRandom</shortname>
+        <comment>A seed is an array of bytes used to bootstrap random number generation.
+To produce cryptographically secure random numbers, both the seed and the algorithm
+must be secure. By default, instances of this class will generate an initial seed
+using an internal entropy source. This seed is unpredictable and appropriate for secure use.
+You may alternatively specify the initial seed explicitly by calling setSeed(byte[]) before
+any random numbers have been generated. Specifying a fixed seed will cause the instance to
+return a predictable sequence of numbers. This may be useful for testing but it is not
+appropriate for secure use.
+
+Although it is common practice to seed Random with the current time, that is dangerous with
+SecureRandom since that value is predictable to an attacker and not appropriate for secure use.</comment>
+        <owner>process</owner>
+        <method>
+            <name>GetRandomBytes</name>
+            <comment>Fills the provided array with cryptographically strong random numbers produced
+by the secure random number generator.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>bytes</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SetRandomSeed</name>
+            <comment>The random number generator seeds itself when created with a random seed. If it is
+required, say for testing purposes, to repeatedly reproduce the same sequence of
+random numbers then the generator may be seeded with a specific value before use.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>seed</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper.KeyGeneratorWrapper</name>
+        <shortname>KeyGenerator</shortname>
+        <comment>This object  provides the functionality of a secret (symmetric) key generator.
+KeyGenerator objects are reusable, i.e., after a key has been generated, the same
+KeyGenerator object can be re-used to generate further keys. 
+
+Algorithm may commonly be one of the following, there are others not listed here.
+AES also known as Rijndael is a 128-bit block cipher supporting keys of 128, 192, and 256 bits.
+DES The Digital Encryption Standard as described in FIPS PUB 46-3.
+DESede Triple DES Encryption (also known as DES-EDE, 3DES, or Triple-DES).</comment>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initialise this KeyGenerator to work with the specified algorithm.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>algorithm</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GenerateKey</name>
+            <comment>Creates and saves internally a SecretKey object appropriate for use with the specified
+algorithm using internally provided random data .</comment>
+            <returntype>javax.crypto.SecretKey</returntype>
+        </method>
+        <method>
+            <name>KeyFromBytes</name>
+            <comment>Creates and saves internally a SecretKey object appropriate for use with the specified
+algorithm using the data in the byte array provided.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>keydata</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>KeyToBytes</name>
+            <comment>Returns a byte array representing the SecretKey.</comment>
+            <returntype>byte[]</returntype>
+        </method>
+        <property>
+            <name>Format</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the format of the key data obtained by KeyToBytes. This will almost certainly be "RAW".</comment>
+        </property>
+        <property>
+            <name>Key</name>
+            <returntype>javax.crypto.SecretKey</returntype>
+            <parameter>
+                <name>key</name>
+                <type>javax.crypto.SecretKey</type>
+            </parameter>
+            <comment>Gets or sets the SecretKey object.</comment>
+        </property>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper.KeyPairGeneratorWrapper</name>
+        <shortname>KeyPairGenerator</shortname>
+        <comment>The KeyPairGenerator is used to generate pairs of public and private keys.
+A key pair generator for a particular algorithm creates a public/private key pair
+that can be used with this algorithm. 
+
+Algorithm is commonly be the following, there may be others not listed here.	 *
+RSA The RSA encryption algorithm as defined in PRSA Public-Key Cryptography Standards .</comment>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initialises the KeyPairGenerator with the specified algorithm and keysize.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>algorithm</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>keysize</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>PublicKeyFromBytes</name>
+            <comment>Creates and saves internally a public key appropriate for use with the specified
+algorithm using the data in X.509 format from the byte array provided.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>keydata</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>PublicKeyToBytes</name>
+            <comment>Returns a byte array in the X.509 format representing the PublicKey.</comment>
+            <returntype>byte[]</returntype>
+        </method>
+        <method>
+            <name>PrivateKeyFromBytes</name>
+            <comment>Creates and saves internally a private key appropriate for use with the specified
+algorithm using the data in the PKCS#8 format from the byte array provided.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>keydata</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>PrivateKeyToBytes</name>
+            <comment>Returns a byte array in the PKC#8 format representing the PrivateKey.</comment>
+            <returntype>byte[]</returntype>
+        </method>
+        <method>
+            <name>GenerateKey</name>
+            <comment>Generates a key pair appropriate for use with the specified algorithm.
+This is a simple holder for a key pair (a public key and a private key).
+It does not enforce any security, and, when initialized, should be treated like
+a private key.</comment>
+            <returntype>void</returntype>
+        </method>
+        <property>
+            <name>PublicKey</name>
+            <returntype>java.security.PublicKey</returntype>
+            <comment>Gets the public key of the KeyPairGenerator object.</comment>
+        </property>
+        <property>
+            <name>Formats</name>
+            <returntype>java.lang.String[]</returntype>
+            <comment>Returns the formats of the key data obtained by xxxKeyToBytes in a String array.
+The public key format is at index 0 and will almost certainly be "X.509".
+The private key format is at index 1 and will almost certainly be "PKCS#8".</comment>
+        </property>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+        <property>
+            <name>PrivateKey</name>
+            <returntype>java.security.PrivateKey</returntype>
+            <comment>Gets the private key of the KeyPairGenerator object.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper.SignaturerWrapper</name>
+        <shortname>Signature</shortname>
+        <comment>Similar to a MessageDigest, a Signature provides a way to check the integrity of information
+transmitted over or stored in an unreliable medium and also ensures that it can be verified
+that it originated from the person it purports to originate from. It accomplishes this by using
+a private key to encode a hash of the original data and the corresponding public key of the key
+pair to decode and check that hash value.
+
+A Signature object is initialized for signing with a private key and is given the data
+to be signed. The resulting signature bytes are typically kept with the signed data.
+When verification is needed, another Signature object is created and initialized for 
+verification and given the corresponding public key. The data and the signature bytes
+are fed to the signature object, and if the data and signature match, the Signature
+object reports success.</comment>
+        <owner>process</owner>
+        <method>
+            <name>Initialise</name>
+            <comment>Initialises a Signature object that uses the specified algorithm for the specified mode.
+Mode must be either SIGNATURE_VERIFY or SIGNATURE_SIGN. Once the object is Initialised
+the data to be signed or verified is provided by one or more successive calls to Update.
+When the entire data to be signed or verified has been loaded Sign or Verify is called.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>algorithm</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>mode</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>key</name>
+                <type>java.security.Key</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Update</name>
+            <comment>One or more calls to this method are required after initialisation to load the data to be
+signed or verified.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Sign</name>
+            <comment>Sign the uploaded data using the private key provided on initialisation.
+Return the calculated signature data.</comment>
+            <returntype>byte[]</returntype>
+        </method>
+        <method>
+            <name>Verify</name>
+            <comment>Verify the uploaded data using the public key provided on initialisation and the signature
+provided. Return true if the verification is successful.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>signature</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+        <field>
+            <name>SIGNATURE_VERIFY</name>
+            <comment></comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>SIGNATURE_SIGN</name>
+            <comment></comment>
+            <returntype>int</returntype>
+        </field>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.CipherWrapper.MacWrapper</name>
+        <shortname>Mac</shortname>
+        <comment>Similar to a MessageDigest, a Message Authentication Code (MAC) provides a way to check
+the integrity of information transmitted over or stored in an unreliable medium, but includes
+a secret key in the calculation. Only someone with the proper key will be able to verify the
+received message. Typically, message authentication codes are used between two parties that
+share a secret key in order to validate information transmitted between these parties.
+
+A MAC object is initialized for signing with a secret key and is given the data to be signed.
+The resulting signature bytes are typically kept with the signed data. When verification is needed,
+another MAC object is created and initialized with the same secret key.The data is uploaded and the
+signature obtained is compared with the signature provided with the message. The comparison may
+be made externally by comparing the signature provided with the data to that returned by Sign or
+the MAC object can do the comparison itself by using the Verify method with the provided signature.</comment>
+        <owner>process</owner>
+        <method>
+            <name>Initialise</name>
+            <comment>Initialises a Mac object that uses the specified algorithm and the specified secret key.
+Once the object is Initialised the data to be signed or verified is provided by one or more
+successive calls to Update. When the entire data to be signed or verified has been loaded
+ Sign or Verify is called.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>algorithm</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>key</name>
+                <type>java.security.Key</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Update</name>
+            <comment>One or more calls to this method are required after initialisation to load the data to be
+signed or verified.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Sign</name>
+            <comment>Sign the uploaded data using the secret key provided on initialisation.
+Return the calculated signature data.</comment>
+            <returntype>byte[]</returntype>
+        </method>
+        <method>
+            <name>Verify</name>
+            <comment>Verify the uploaded data using the public key provided on initialisation and the signature
+provided. Return true if the verification is successful.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>signature</name>
+                <type>byte[]</type>
+            </parameter>
+        </method>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.agraham.encryption.Base64</name>
+        <shortname>Base64</shortname>
+        <comment>The Base64 object encodes and decodes to and from Base64 notation.</comment>
+        <owner>process</owner>
+        <method>
+            <name>EncodeStoS</name>
+            <comment>Encode a string into a string of Base64 characters. The string is converted
+into an array of bytes according to encoding and then coded as Base64.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>data</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>encoding</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>EncodeStoB</name>
+            <comment>Encode a string into a byte array of  Base64 characters. The string is converted
+into an array of bytes according to encoding and then coded as Base64.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>data</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>encoding</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>EncodeBtoS</name>
+            <comment>Encode a byte array into a string of Base64 characters.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>offset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DecodeStoS</name>
+            <comment>Decode a string of Base64 characters into a string.  Tab, CR, LF and Space
+characters in the data are ignored, invalid Base64 characters throw an exception.
+Encoding defines the encoding of the byte data of the original coded string.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>b64string</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>encoding</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DecodeStoB</name>
+            <comment>Decode a String of Base64 characters into a byte array. Tab, CR, LF and Space
+characters in the string are ignored, invalid Base64 characters throw an exception.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>b64string</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DecodeBtoS</name>
+            <comment>Decode an array of Base64 characters into a string. Tab, CR, LF and Space
+characters in the data are ignored, invalid Base64 characters throw an exception.
+Encoding defines the encoding of the byte data of the original coded string.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>b64bytes</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>offset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>length</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>encoding</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DecodeBtoB</name>
+            <comment>Decode a byte array of Base64 characters into a byte array. Tab, CR, LF and Space
+characters in the data are ignored, invalid Base64 characters throw an exception.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>b64bytes</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>offset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>EncodeBtoB</name>
+            <comment>Encode a byte array into a byte array of Base64 characters.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>offset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <property>
+            <name>LineLength</name>
+            <returntype>int</returntype>
+            <parameter>
+                <name>linelength</name>
+                <type>int</type>
+            </parameter>
+            <comment>Gets or sets the number of Base64 characters placed on each line when line breaks
+are being added to the Base64 output when encoding.</comment>
+        </property>
+        <property>
+            <name>Version</name>
+            <returntype>double</returntype>
+            <comment>Returns the version number of the library.</comment>
+        </property>
+        <property>
+            <name>BreakLines</name>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>breaklines</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Gets or sets whether line breaks are added to the Base64 output when encoding.</comment>
+        </property>
+        <property>
+            <name>UrlSafe</name>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>urlsafe</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Gets or sets whether the Base64 encoding and decoding is done in a "URL safe" manner.
+In "URL safe mode" the "plus" character in the Base64 becomes a  "hyphen" and  the
+"slash" character becomes an "underscore".</comment>
+        </property>
+    </class>
+    <version>1.1</version>
+    <comment>This library implements various encryption and encoding methods
+
+The following objects are available:
+
+Base64: used to encode and decode data in Base64 representation.
+Cipher: used for encrypting/decrypting data.
+KeyGenerator: used to generate and mainpulate secret keys for symmetric ciphers.
+MAC: (Message Authentication Code) used generate secret key encrypted message digests.
+MessageDigest: used to calculate the message digest (hash) of specified data.
+SecureRandom: used to generate pseudo-random numbers.
+Signature: are used to sign data and verify digital signatures.
+
+More information is given on each object in its help comments.
+
+These comments are intended to document the facilities provided by this library.
+They are not intended in any way to cover their practical use. It is assumed that
+you know what you are doing when you use this library.
+
+Documentation on the Java Cryptography Architecture may be found at
+&lt;link&gt;http://download.oracle.com/javase/6/docs/technotes/guides/security/crypto/CryptoSpec.html&lt;/link&gt;
+
+A list of standard names used in the Java Cryptography Architecture may be found at
+&lt;link&gt;http://download.oracle.com/javase/6/docs/technotes/guides/security/StandardNames.html&lt;/link&gt;
+
+Any implementation does not neccessarily include the complete list. A list of included
+Service Providers may be obtained with the Cipher.GetServices method and they may be passed
+individually to Cipher.GetAlgorithms to get the list of supported algorithms for that provider.</comment>
+    <author>Andrew Graham</author>
+</root>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.04</doclet-version-NOT-library-version>
+    <class>
+        <name>anywhersoftware.b4j.objects.WebSocketClientWrapper</name>
+        <shortname>WebSocketClient</shortname>
+        <owner>process</owner>
+        <event>Connected</event>
+        <event>Closed (Reason As String)</event>
+        <event>TextMessage (Message As String)</event>
+        <method>
+            <name>Connect</name>
+            <comment>Tries to connect to the given Url. The Url should start with ws:// or wss://</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Url</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the object and sets the subs that will handle the events.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SendText</name>
+            <comment>Sends a text message.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the connection.</comment>
+            <returntype>void</returntype>
+        </method>
+        <property>
+            <name>Connected</name>
+            <returntype>boolean</returntype>
+            <comment>Checks whether the connection is open.</comment>
+        </property>
+    </class>
+    <version>1.0</version>
+    <dependsOn>jetty_b4j</dependsOn>
+</root>

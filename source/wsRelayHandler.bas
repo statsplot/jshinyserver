@@ -1,5 +1,5 @@
 ﻿Type=Class
-Version=4.2
+Version=4.7
 ModulesStructureVersion=1
 B4J=true
 @EndOfDesignText@
@@ -25,7 +25,7 @@ Sub Class_Globals
 	
 	Private paramWorkerid As String
 	Private appFolderName As String
-	
+	Private RemoteIP As String
 End Sub
 
 Public Sub Initialize
@@ -42,7 +42,16 @@ Try
 	wscIsDisconnected = True
 	ws = WebSocket1
 	comFunMod.ws_SetMaxTextMessage(ws, appM.wsMaxTextSizeKb)
-
+	
+	'get remote IP, checking X-Real-IP and X-Forwarded-For
+	If ws.UpgradeRequest.GetHeader("X-Real-IP")<>"" Then
+		RemoteIP = ws.UpgradeRequest.GetHeader("X-Real-IP")
+	else if ws.UpgradeRequest.GetHeader("X-Forwarded-For")<>"" Then
+		RemoteIP = ws.UpgradeRequest.GetHeader("X-Forwarded-For")
+	Else
+		RemoteIP = ws.UpgradeRequest.RemoteAddress
+	End If
+	
 	appFolderName =ws.UpgradeRequest.GetParameter("__app__")
 	paramWorkerid =ws.UpgradeRequest.GetParameter("__w__")
 	
@@ -52,7 +61,7 @@ Try
 	appname = comFunMod.getFullAppname(appFolderName,paramWorkerid)
 
 	If appname="" Or appM.AppnameConfTsMap.ContainsKey(appname) = False Then		
-		comFunMod.LogFmt("error", "wrong_appname", $"${ws.UpgradeRequest.RemoteAddress} port=${wscPort} ${appname}"$)
+		comFunMod.LogFmt("info", "wrong_appname", $"${RemoteIP} port=${wscPort} ${appname}"$)
 		ws.Close
 		Return		
 	End If
@@ -75,7 +84,7 @@ Try
 	'make sure the R session keep running
 	appM.TSappnameUpdate(appname)
 	
-	comFunMod.AppLg(appname, "info", "wsConneted", $"${ws.UpgradeRequest.RemoteAddress} port=${wscPort} "$) 
+	comFunMod.AppLg(appname, "info", "wsConneted", $"${RemoteIP} port=${wscPort} "$) 
 	
 	
 	'timer to check if the connection to R session is alive

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.05</doclet-version-NOT-library-version>
+    <class>
+        <name>anywheresoftware.b4a.objects.SocketWrapper</name>
+        <shortname>Socket</shortname>
+        <comment>The Socket object is an endpoint for network communication.
+If you are connecting to a server then you should initialize a Socket object and call Connect with the server address.
+The Connected event will be raised when the connection is ready or if the connection has failed.
+Sockets are also used by the server. Once a new incoming connection is established, the NewConnection event will be raised and an initialized Socket object will be passed as a parameter.
+Once a socket is connected you should use its &lt;code&gt;InputStream&lt;/code&gt; and &lt;code&gt;OutputStream&lt;/code&gt; to communicate with the other machine.</comment>
+        <owner CheckForReinitialize="true">process</owner>
+        <event>Connected (Successful As Boolean)</event>
+        <permission>android.permission.INTERNET</permission>
+        <method>
+            <name>Connect</name>
+            <comment>Tries to connect to the given address. The connection is done in the background.
+The Connected event will be raised when the connection is ready or if it has failed.
+Host - The host name or IP.
+Port - Port number.
+TimeOut - Connection timeout. Value is specified in milliseconds. Pass 0 to disable the timeout.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Host</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Port</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>TimeOut</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes a new socket.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>InitializeSSL</name>
+            <comment>Initializes a new SSL socket.
+ EventName - Sets the sub that will handle the Connected event.
+ KeystoreStream - An InputStream that points to an alternate keystore. Pass Null to use the default keystore.
+ Password - Custom keystore password.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>KeyStoreStream</name>
+                <type>java.io.InputStream</type>
+            </parameter>
+            <parameter>
+                <name>Password</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the socket and the streams.
+It is safe to call this method multiple times.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>ResolveHost</name>
+            <comment>Resolves the host name and returns the IP address.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Host</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment>Tests whether the object was initialized.</comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Connected</name>
+            <returntype>boolean</returntype>
+            <comment>Tests whether the socket is connected.</comment>
+        </property>
+        <property>
+            <name>InputStream</name>
+            <returntype>java.io.InputStream</returntype>
+            <comment>Returns the socket's InputStream which is used to read data.</comment>
+        </property>
+        <property>
+            <name>RemoteAddress</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the address of the remote endpoint or an empty string if it is not connected.</comment>
+        </property>
+        <property>
+            <name>TimeOut</name>
+            <returntype>int</returntype>
+            <parameter>
+                <name>value</name>
+                <type>int</type>
+            </parameter>
+            <comment>Gets or sets the timeout of the socket's InputStream. Value is specified in milliseconds.
+By default there is no timeout.</comment>
+        </property>
+        <property>
+            <name>OutputStream</name>
+            <returntype>java.io.OutputStream</returntype>
+            <comment>Returns the socket's OutputStream which is used to write data.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.SocketWrapper.ServerSocketWrapper</name>
+        <shortname>ServerSocket</shortname>
+        <comment>The ServerSocket object allows other machines to connect to this machine.
+The ServerSocket listens to a specific port. Once a connection arrives, the NewConnection event is raised with a Socket object.
+This Socket object should be used to communicate with this client. 
+You may call Listen again and receive more connections. A single ServerSocket can handle many connections.
+For each connection there should be one Socket object.</comment>
+        <owner CheckForReinitialize="true">process</owner>
+        <event>NewConnection (Successful As Boolean, NewSocket As Socket)</event>
+        <permission>android.permission.INTERNET</permission>
+        <permission>android.permission.ACCESS_WIFI_STATE</permission>
+        <permission>android.permission.ACCESS_NETWORK_STATE</permission>
+        <method>
+            <name>Listen</name>
+            <comment>Starts listening in the background for incoming connections.
+When a connection is established, the NewConnection event is raised. If the connection is successful a Socket object will be passed in the event.
+Calling Listen while the ServerSocket is listening will not do anything.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the ServerSocket.
+Port - The port that the server will listen to. Note that you should call Listen to start listening. Port numbers lower than 1024 are restricted by the system.
+EventName - The event Sub prefix name.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Port</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the ServerSocket. This will not close any other sockets.
+You should call Initialize if you want to use this object again.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>GetMyIP</name>
+            <comment>Returns the server's IP. Will return "127.0.0.1" (localhost) if no other IP is found.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment>Tests whether the object is initialized.</comment>
+            <returntype>boolean</returntype>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.SocketWrapper.UDPSocket</name>
+        <shortname>UDPSocket</shortname>
+        <comment>UDPSocket supports sending and receiving UDPPackets. Sending packets is done by calling the Send method.
+When a packet arrives the PacketArrived event is raised with the packet.
+This example sends a string message to some other machine. When a packet arrives it converts it to string and shows it:
+         &lt;code&gt;
+Sub Process_Globals
+    Private Msgbox As Msgboxes
+    Dim UDPSocket1 As UDPSocket
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+    UDPSocket1.Initialize("UDP", 5000, 8000)
+    Dim Packet As UDPPacket
+    Dim data() As Byte
+    data = "Hello from RaspBerry".GetBytes("UTF8")
+    Packet.Initialize(data, "localhost", 5000)
+    UDPSocket1.Send(Packet)   
+End Sub
+
+Sub UDP_PacketArrived (Packet As UDPPacket)
+    Dim msg As String
+    msg = BytesToString(Packet.Data, Packet.Offset, Packet.Length, "UTF8")
+    Msgbox.show("Message received: " &amp; msg, "")
+End Sub&lt;/code&gt;</comment>
+        <owner CheckForReinitialize="true">process</owner>
+        <event>PacketArrived (Packet As UDPPacket)</event>
+        <permission>android.permission.INTERNET</permission>
+        <method>
+            <name>Send</name>
+            <comment>Sends a Packet. The packet will be sent in the background (asynchronously).</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Packet</name>
+                <type>anywheresoftware.b4a.objects.SocketWrapper.UDPSocket.UDPPacket</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the socket and starts listening for packets.
+EventName - The name of the Sub that will handle the events.
+Port - Local port to listen on. Passing 0 will cause the OS to choose an available port automatically.
+ReceiveBufferSize - The size of the receiving packet. Packets larger than this value will be truncated.
+Pass 0 if you do not want to receive any packets.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Port</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>ReceiveBufferSize</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the socket.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>toString</name>
+            <comment></comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>GetBroadcastAddress</name>
+            <comment>Returns the network broadcast address.
+Note that the loopback broadcast address is 127.255.255.255.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>Initialize2</name>
+            <comment>Similar to Initialize.
+ReuseAddress - If true then the SO_REUSEADDR flag is set which means that multiple processes can open the port.
+In that case broadcasted messages will arrive to all processes.
+LoopbackOnly - If true then the socket will be bound to the local host. It will only receive messages sent by other processes.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Port</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>ReceiveBufferSize</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>ReuseAddress</name>
+                <type>boolean</type>
+            </parameter>
+            <parameter>
+                <name>LoopbackOnly</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment>Tests whether this object is initialized.</comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Port</name>
+            <returntype>int</returntype>
+            <comment>Gets the local port that this socket listens to.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.SocketWrapper.UDPSocket.UDPPacket</name>
+        <shortname>UDPPacket</shortname>
+        <comment>A packet of data that is being sent or received.
+To send a packet call one of the Initialize methods and then send the packet by passing it to UDPSocket.Send.
+When a packet arrives you can get the data in the packet from the available properties.</comment>
+        <objectwrapper>anywheresoftware.b4a.objects.SocketWrapper.UDPSocket.MyDatagramPacket</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the packet and makes it ready for sending.
+Data - The data that will be send.
+Host - The target host name or IP address.
+Port - The target port.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>Host</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Port</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>toString</name>
+            <comment></comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>Initialize2</name>
+            <comment>Similar to Initialize. The data sent is based on the Offset and Length values.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>Offset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Length</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Host</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Port</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Data</name>
+            <returntype>byte[]</returntype>
+            <comment>Gets the data array received.</comment>
+        </property>
+        <property>
+            <name>Port</name>
+            <returntype>int</returntype>
+            <comment>Gets the port of the sending machine.</comment>
+        </property>
+        <property>
+            <name>HostAddress</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Gets the IP address of the sending machine.</comment>
+        </property>
+        <property>
+            <name>Host</name>
+            <returntype>java.lang.String</returntype>
+            <comment>&lt;b&gt;This method is deprecated and will not work properly on Android 4+ device.&lt;/b&gt;
+Use HostAddress instead.</comment>
+        </property>
+        <property>
+            <name>Offset</name>
+            <returntype>int</returntype>
+            <comment>Gets the offset in the data array where the available data starts.</comment>
+        </property>
+        <property>
+            <name>Length</name>
+            <returntype>int</returntype>
+            <comment>Gets the length of available bytes in the data. This can be shorter than the array length.</comment>
+        </property>
+    </class>
+    <version>1.2</version>
+    <comment>The network library includes two objects for working with TCP: Socket, ServerSocket With Socket you can communicate with other devices and computers over TCP/IP.
+ServerSocket allows you to listen for incoming connections. Once a connection is established you will receive a Socket object that will be used for handling this specific connection.
+See the &lt;link&gt;Network tutorial|http://www.basic4ppc.com/forum/basic4android-getting-started-tutorials/7001-android-network-tutorial.html&lt;/link&gt;.
+It also includes two objects for working with UDP: UDPSocket and UDPPacket. See UDPSocket for more information.</comment>
+</root>

@@ -1,0 +1,3122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.05</doclet-version-NOT-library-version>
+    <class>
+        <name>anywheresoftware.b4a.objects.collections.Map</name>
+        <shortname>Map</shortname>
+        <comment>A collection that holds pairs of keys and values. The keys are unique. Which means that if you add a key/value pair (entry) and
+the collection already holds an entry with the same key, the previous entry will be removed from the map.
+Fetching an item is done by looking for its key. This is usually a very fast operation (O(1) compared to O(n) in a list).
+The key should be a string or a number. The value can be any type of object.
+Note that this map implementation does return items in the same order as they were added.
+Usually you will use Put to add items and Get or GetDefault to get the values based on the key.
+If you need to iterate over all the items you can use a For loop like:&lt;code&gt;
+For i = 0 To Map1.Size - 1
+ Dim Key, Value As String
+ Key = Map1.GetKeyAt(i)
+ Value = Map1.GetValueAt(i)
+Next&lt;/code&gt;
+Similar to a list, a map can hold any object, however if it is a process global variable then it cannot hold activity objects (like views).
+Maps are very useful for storing applications settings. 
+You can save and load maps with File.WriteMap and File.ReadMap.</comment>
+        <objectwrapper>anywheresoftware.b4a.objects.collections.Map.MyMap</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the object.
+Example:&lt;code&gt;
+Dim Map1 As Map
+Map1.Initialize&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Values</name>
+            <comment>Returns an object which can be used to iterate over all the values with a For Each block.
+Example:&lt;code&gt;
+For Each v As Int In map1.Values
+	Log(v)
+Next&lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.BA.IterableList</returntype>
+        </method>
+        <method>
+            <name>Put</name>
+            <comment>Puts a key/value pair in the map, overwriting the previous item with this key (if such exists).
+Returns the previous item with this key or null if there was no such item.
+Note that if you are using strings as the keys then the keys are case sensitive.
+Example:&lt;code&gt;
+Map1.Put("Key", "Value")&lt;/code&gt;</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Value</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetDefault</name>
+            <comment>Returns the value of the item with the given key. If no such item exists the specified default value is returned.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Default</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetValueAt</name>
+            <comment>Returns the value of the item at the given index.
+GetKeyAt and GetValueAt should be used to iterate over all the items.
+These methods are optimized for iterating over the items in ascending order.
+Example:&lt;code&gt;
+For i = 0 to Map.Size - 1
+	Log("Key: " &amp; Map.GetKeyAt(i))
+	Log("Value: " &amp; Map.GetValueAt(i))
+Next&lt;/code&gt;</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Clear</name>
+            <comment>Clears all items from the map.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Keys</name>
+            <comment>Returns an object which can be used to iterate over all the keys with a For Each block.
+Example:&lt;code&gt;
+For Each k As String In map1.Keys
+	Log(k)
+Next&lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.BA.IterableList</returntype>
+        </method>
+        <method>
+            <name>ContainsKey</name>
+            <comment>Tests whether there is an item with the given key.
+Example:&lt;code&gt;
+If Map.ContainsKey("some key") Then ... &lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Remove</name>
+            <comment>Removes the item with the given key, if such exists.
+Returns the item removed or null if no matching item was found.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Get</name>
+            <comment>Returns the value of the item with the given key.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>GetKeyAt</name>
+            <comment>Returns the key of the item at the given index.
+GetKeyAt and GetValueAt should be used to iterate over all the items.
+These methods are optimized for iterating over the items in ascending order.
+Example:&lt;code&gt;
+For i = 0 to Map.Size - 1
+	Log("Key: " &amp; Map.GetKeyAt(i))
+	Log("Value: " &amp; Map.GetValueAt(i))
+Next&lt;/code&gt;</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <property>
+            <name>Size</name>
+            <returntype>int</returntype>
+            <comment>Returns the number of items stored in the map.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.collections.List</name>
+        <shortname>List</shortname>
+        <comment>Lists are similar to dynamic arrays. You can add and remove items from a list and it will change its size accordingly.
+A list can hold any type of object. However if a list is declared as a process global object it cannot hold activity objects (like views).
+Basic4android automatically converts regular arrays to lists. So when a List parameter is expected you can pass an array instead.
+For example:&lt;code&gt;
+Dim List1 As List
+List1.Initialize
+List1.AddAll(Array As Int(1, 2, 3, 4, 5))&lt;/code&gt;
+Use the Get method to get an item from the list.
+Lists can be saved and loaded from files using File.WriteList and File.ReadList.
+You can use a For loop to iterate over all the values:&lt;code&gt;
+For i = 0 To List1.Size - 1
+ Dim number As Int
+ number = List1.Get(i)
+ ...
+Next&lt;/code&gt;</comment>
+        <objectwrapper>java.util.List</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes an empty list.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Sort</name>
+            <comment>Sorts the list.
+The items must all be numbers or strings.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Ascending</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IndexOf</name>
+            <comment>Returns the index of the specified item, or -1 if it was not found.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Item</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Clear</name>
+            <comment>Removes all the items from the list.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>AddAll</name>
+            <comment>Adds all elements in the specified collection to the end of the list.
+Note that you can add an array directly.
+Example:&lt;code&gt;
+List.AddAll(Array As String("value1", "value2"))&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>List</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SortCaseInsensitive</name>
+            <comment>Lexicographically sorts the list, ignoring the characters case.
+The items must all be numbers or strings.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Ascending</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SortTypeCaseInsensitive</name>
+            <comment>Similar to SortType. Lexicographically sorts the list, ignoring the characters case.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>FieldName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Ascending</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SortType</name>
+            <comment>Sorts a list with items of user defined type. The list is sorted based on the specified field.
+FieldName - The case-sensitive field name that will be used for sorting. Field must contain numbers or strings.
+Ascending - Whether to sort ascending or descending.
+Example:&lt;code&gt;
+Sub Process_Globals
+	Type Person(Name As String, Age As Int)
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Dim Persons As List
+	Persons.Initialize
+	For i = 1 To 50
+		Dim p As Person
+		p.Name = "Person" &amp; i
+		p.Age = Rnd(0, 121)
+		Persons.Add(p)
+	Next
+	Persons.SortType("Age", True) 'Sort the list based on the Age field.
+	For i = 0 To Persons.Size - 1
+		Dim p As Person
+		p = Persons.Get(i)
+		Log(p)
+	Next
+End Sub&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>FieldName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Ascending</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>RemoveAt</name>
+            <comment>Removes the item at the specified index.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Add</name>
+            <comment>Adds an item at the end of the list.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>item</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Get</name>
+            <comment>Gets the item in the specified index. The item is not removed from the list.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Set</name>
+            <comment>Replaces the current item in the specified index with the new item.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Item</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize2</name>
+            <comment>Initializes a list with the given values. This method should be used to convert arrays to lists.
+Note that if you pass a list to this method then both objects will share the same list,
+and if you pass an array the list will be of a fixed size. Meaning that you cannot later add or remove items.
+Example:&lt;code&gt;
+Dim List1 As List
+List1.Initialize2(Array As Int(1,2,3,4,5))&lt;/code&gt;
+Example:&lt;code&gt;
+Dim List1 As List
+Dim SomeArray(10) As String
+'Fill array...
+List1.Initialize2(SomeArray)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Array</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>InsertAt</name>
+            <comment>Inserts the specified Item in the specified index. As a result all items with index larger then
+ the specified index are shifted.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Item</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>AddAllAt</name>
+            <comment>Adds all elements in the specified collection starting at the specified index.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>List</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <property>
+            <name>Size</name>
+            <returntype>int</returntype>
+            <comment>Returns the number of items in the list.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.debug.JustForPackage</name>
+        <owner>process</owner>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.keywords.StringBuilderWrapper</name>
+        <shortname>StringBuilder</shortname>
+        <comment>StringBuilder is a mutable string, unlike regular strings which are immutable.
+StringBuilder is especially useful when you need to concatenate many strings.
+The following code demonstrates the performance boosting of StringBuilder:&lt;code&gt;
+Dim start As Long
+start = DateTime.Now
+'Regular string
+Dim s As String
+For i = 1 To 5000
+	s = s &amp; i
+Next
+Log(DateTime.Now - start)
+'StringBuilder
+start = DateTime.Now
+Dim sb As StringBuilder
+sb.Initialize
+For i = 1 To 5000
+	sb.Append(i)
+Next
+Log(DateTime.Now - start)&lt;/code&gt;
+Tested on a real device, the first 'for loop' took about 20 seconds and the second took less then tenth of a second.
+The reason is that the code: &lt;code&gt;s = s &amp; i&lt;/code&gt; creates a new string each iteration (strings are immutable).
+The method &lt;code&gt;StringBuilder.ToString&lt;/code&gt; converts the object to a string.</comment>
+        <objectwrapper>java.lang.StringBuilder</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the object.
+Example:&lt;code&gt;
+Dim sb As StringBuilder
+sb.Initialize
+sb.Append("The value is: ").Append(SomeOtherVariable).Append(CRLF)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Insert</name>
+            <comment>Inserts the specified text at the specified offset.</comment>
+            <returntype>anywheresoftware.b4a.keywords.StringBuilderWrapper</returntype>
+            <parameter>
+                <name>Offset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ToString</name>
+            <comment>Converts the object to a string.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>Remove</name>
+            <comment>Removes the specified characters.
+StartOffset - The first character to remove.
+EndOffset - The ending index. This character will not be removed.</comment>
+            <returntype>anywheresoftware.b4a.keywords.StringBuilderWrapper</returntype>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>EndOffset</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Append</name>
+            <comment>Appends the specified text at the end.
+Returns the same object, so you can chain methods.
+Example:&lt;code&gt;
+sb.Append("First line").Append(CRLF).Append("Second line")&lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.keywords.StringBuilderWrapper</returntype>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Length</name>
+            <returntype>int</returntype>
+            <comment>Returns the number of characters.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.keywords.Regex</name>
+        <comment>Regex is a predefined object that contains regular expressions methods.
+All methods receive a 'pattern' string. This is the regular expression pattern.
+More information about the regular expression engine can be found here: &lt;link&gt;Pattern Javadoc|http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html&lt;/link&gt;
+&lt;link&gt;Regular expression in Basic4android tutorial|http://www.basic4ppc.com/forum/basic4android-getting-started-tutorials/7123-regular-expressions-tutorial.html&lt;/link&gt;.</comment>
+        <owner>process</owner>
+        <method>
+            <name>Replace</name>
+            <comment>Replaces all the matches in the text based on the specified pattern and template.
+Example:&lt;code&gt;
+Log(Regex.Replace("\d", "1 2 3 4", "-$0-")) '-1- -2- -3- -4-&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Template</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsMatch2</name>
+            <comment>Tests whether the given text is a match for the given pattern.
+Options - One or more pattern options. These options can be combined with Bit.Or.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Options</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Split</name>
+            <comment>Splits the given text around matches of the pattern.
+Note that trailing empty matches will be removed.
+Example:&lt;code&gt;
+Dim components() As String
+components = Regex.Split(",", "abc,def,,ghi") 'returns: "abc", "def", "", "ghi"&lt;/code&gt;</comment>
+            <returntype>java.lang.String[]</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Matcher2</name>
+            <comment>Same as Matcher with the additional pattern options.</comment>
+            <returntype>anywheresoftware.b4a.keywords.Regex.MatcherWrapper</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Options</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Replace2</name>
+            <comment>Similar to Replace. Allows setting the regex options.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Options</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Template</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsMatch</name>
+            <comment>Tests whether the given text is a match for the given pattern.
+The whole text should match the pattern. Use Matcher if you look for a substring that matches the pattern.
+Example:&lt;code&gt;
+If Regex.IsMatch("\d\d\d", EditText1.Text) = False Then ...&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Split2</name>
+            <comment>Same as Split with the additional pattern options.</comment>
+            <returntype>java.lang.String[]</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Options</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Matcher</name>
+            <comment>Returns a Matcher object which can be used to find matches of the given pattern in the text.
+Example:&lt;code&gt;
+Dim text, pattern As String
+text = "This is an interesting sentence with two numbers: 123456 and 7890."
+pattern = "\d+" 'one or more digits
+Dim Matcher1 As Matcher
+Matcher1 = Regex.Matcher(pattern, text)
+Do While Matcher1.Find
+	Log("Found: " &amp; Matcher1.Match)
+Loop&lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.keywords.Regex.MatcherWrapper</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <field>
+            <name>MULTILINE</name>
+            <comment>Changes ^ and $ to match the start and end of each line instead of the whole string.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>CASE_INSENSITIVE</name>
+            <comment>Enables case insensitive matching.</comment>
+            <returntype>int</returntype>
+        </field>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.keywords.Regex.MatcherWrapper</name>
+        <shortname>Matcher</shortname>
+        <comment>A Matcher object is used to search for a pattern in a string.
+&lt;code&gt;Regex.Matcher&lt;/code&gt; returns a matcher object for a specific pattern and specific text.
+Example:&lt;code&gt;
+Dim text, pattern As String
+text = "This is an interesting sentence with two numbers: 123456 and 7890."
+pattern = "\d+" 'one or more digits
+Dim Matcher1 As Matcher
+Matcher1 = Regex.Matcher(pattern, text)
+Do While Matcher1.Find
+	Log("Found: " &amp; Matcher1.Match)
+Loop&lt;/code&gt;</comment>
+        <objectwrapper>java.util.regex.Matcher</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>GetStart</name>
+            <comment>Returns the start offset of the specified captured group.
+Use GetStart(0) to get the start offset of the whole match.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Find</name>
+            <comment>Searches for the next substring that matches the pattern.
+Returns True is such a match was found.
+Example:&lt;code&gt;
+Dim text, pattern As String
+text = "This is an interesting sentence with two numbers: 123456 and 7890."
+pattern = "\d+" 'one or more digits
+Dim Matcher1 As Matcher
+Matcher1 = Regex.Matcher(pattern, text)
+Do While Matcher1.Find
+	Log("Found: " &amp; Matcher1.Match)
+Loop&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>Group</name>
+            <comment>Returns the value of the specified captured group.
+Group(0) returns the whole match.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>GetEnd</name>
+            <comment>Returns the end offset of the specified captured group.
+Use GetEnd(0) to get the end offset of the whole match.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <property>
+            <name>GroupCount</name>
+            <returntype>int</returntype>
+            <comment>Returns the number of capturing groups in the pattern.
+Note that the number returned does not include group(0) which is the whole match.</comment>
+        </property>
+        <property>
+            <name>Match</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the matched value. This is the same as calling Group(0).</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.keywords.DateTime</name>
+        <comment>Date and time related methods.
+DateTime is a predefined object. You should not declare it yourself.
+Date and time values are stored as ticks. Ticks are the number of milliseconds since January 1, 1970 00:00:00 UTC.
+&lt;b&gt;This value is too large to be stored in an Int variable. It should only be stored in a Long variable.&lt;/b&gt;
+The methods &lt;code&gt;DateTime.Date&lt;/code&gt; and &lt;code&gt;DateTime.Time&lt;/code&gt; convert the ticks value to a string.
+You can get the current time with &lt;code&gt;DateTime.Now&lt;/code&gt;.
+Example:&lt;code&gt;
+Dim now As Long
+now = DateTime.Now
+Msgbox("The date is: " &amp; DateTime.Date(now) &amp; CRLF &amp; _
+	"The time is: " &amp; DateTime.Time(now), "")&lt;/code&gt;</comment>
+        <owner>process</owner>
+        <method>
+            <name>GetYear</name>
+            <comment>Returns the year component from the ticks value.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetMinute</name>
+            <comment>Returns the minutes within a hour component from the ticks value.
+Values are between 0 to 59.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetHour</name>
+            <comment>Returns the hour of day component from the ticks value.
+Values are between 0 to 23.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DateTimeParse</name>
+            <comment>Parses the given date and time strings and returns the ticks representation.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Date</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Time</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DateParse</name>
+            <comment>Parses the given date string and returns its ticks representation.
+An exception will be thrown if parsing fails.
+Example:&lt;code&gt;
+Dim SomeTime As Long
+SomeTime = DateTime.DateParse("02/23/2007")&lt;/code&gt;</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Date</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Time</name>
+            <comment>Returns a string representation of the time (which is stored as ticks).
+The time format can be set with the TimeFormat keyword.
+Example:&lt;code&gt;
+Log("The time now is: " &amp; DateTime.Time(DateTime.Now))&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetTimeZoneOffsetAt</name>
+            <comment>Returns the offset measured in hours from UTC at the specified date (offset can change due to daylight saving settings).</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Date</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Date</name>
+            <comment>Returns a string representation of the date (which is stored as ticks).
+The date format can be set with the DateFormat keyword.
+Example:&lt;code&gt;
+Log("Today is: " &amp; DateTime.Date(DateTime.Now))&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetSecond</name>
+            <comment>Returns the seconds within a minute component from the ticks value.
+Values are between 0 to 59.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SetTimeZone</name>
+            <comment>Sets the application time zone. This setting affect the conversions of dates to ticks value and vice versa (device default settings are not changed).</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>OffsetHours</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetDayOfWeek</name>
+            <comment>Returns the day of week component from the ticks value.
+Values are between 1 to 7, where 1 means Sunday.
+You can use the AHLocale library if you need to change the first day.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetDayOfYear</name>
+            <comment>Returns the day of year component from the ticks value.
+Values are between 1 to 366.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Add</name>
+            <comment>Returns a ticks value which is the result of adding the specified time spans to the given ticks value.
+Pass negative values if you want to subtract the values.
+Example:&lt;code&gt;
+Dim Tomorrow As Long
+Tomorrow = DateTime.Add(DateTime.Now, 0, 0, 1)
+Log("Tomorrow date is: " &amp; DateTime.Date(Tomorrow))&lt;/code&gt;</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+            <parameter>
+                <name>Years</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Months</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Days</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>TimeParse</name>
+            <comment>Parses the given time string and returns its ticks representation.
+Note that the returned value date will be today.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Time</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetMonth</name>
+            <comment>Returns the month of year component from the ticks value.
+Values are between 1 to 12.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetDayOfMonth</name>
+            <comment>Returns the day of month component from the ticks value.
+Values are between 1 to 31.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Ticks</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <property>
+            <name>DateFormat</name>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <comment>Gets or sets the format used to parse date strings.
+See this page for the supported patterns: &lt;link&gt;formats|http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html&lt;/link&gt;.
+The default pattern is MM/dd/yyyy (04/23/2002 for example).</comment>
+        </property>
+        <property>
+            <name>DeviceDefaultDateFormat</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the default date format based on the device selected language.</comment>
+        </property>
+        <property>
+            <name>DeviceDefaultTimeFormat</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the default time format based on the device selected language.</comment>
+        </property>
+        <property>
+            <name>Now</name>
+            <returntype>long</returntype>
+            <comment>Gets the current time as ticks (number of milliseconds since January 1, 1970).</comment>
+        </property>
+        <property>
+            <name>TimeZoneOffset</name>
+            <returntype>double</returntype>
+            <comment>Returns the current offset measured in hours from UTC.</comment>
+        </property>
+        <property>
+            <name>TimeFormat</name>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Pattern</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <comment>Gets or sets the format used to parse time strings.
+See this page for the supported patterns: &lt;link&gt;formats|http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html&lt;/link&gt;.
+The default pattern is HH:mm:ss (23:45:12 for example).</comment>
+        </property>
+        <field>
+            <name>TicksPerDay</name>
+            <comment></comment>
+            <returntype>long</returntype>
+        </field>
+        <field>
+            <name>TicksPerSecond</name>
+            <comment></comment>
+            <returntype>long</returntype>
+        </field>
+        <field>
+            <name>TicksPerHour</name>
+            <comment></comment>
+            <returntype>long</returntype>
+        </field>
+        <field>
+            <name>TicksPerMinute</name>
+            <comment></comment>
+            <returntype>long</returntype>
+        </field>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.keywords.Common</name>
+        <comment>These are the internal keywords.</comment>
+        <owner>process</owner>
+        <method>
+            <name>ACos</name>
+            <comment>Returns the angle measured with radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ATan2D</name>
+            <comment>Returns the angle measured with degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Y</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>X</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Exit</name>
+            <comment>Exits the most inner loop.
+Note that Exit inside a Select block will exit the Select block.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>NumberFormat2</name>
+            <comment>Converts the specified number to a string. 
+The string will include at least Minimum Integers, at most Maximum Fractions digits and at least Minimum Fractions digits.
+GroupingUsed - Determines whether to group every three integers.
+Example:&lt;code&gt;
+Log(NumberFormat2(12345.67, 0, 3, 3, false)) '"12345.670"&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>MinimumIntegers</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>MaximumFractions</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>MinimumFractions</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>GroupingUsed</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Try</name>
+            <comment>Any exception thrown inside a try block will be caught in the catch block.
+Call LastException to get the caught exception.
+Syntax:
+Try
+ ...
+Catch
+ ...
+End Try</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Chr</name>
+            <comment>Returns the character that is represented by the given unicode value.</comment>
+            <returntype>char</returntype>
+            <parameter>
+                <name>UnicodeValue</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Rnd</name>
+            <comment>Returns a random integer between Min (inclusive) and Max (exclusive).</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Min</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Max</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Array</name>
+            <comment>Creates a single dimension array of the specified type, or Object if the type is not specified.
+The syntax is: Array As type (list of values).
+Example:&lt;code&gt;
+Dim Days() As String = Array As String("Sunday", "Monday", ...)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>SubExists</name>
+            <comment>Tests whether the object includes the specified method.
+Returns false if the object was not initialized or not an instance of a user class.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Object</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ASin</name>
+            <comment>Returns the angle measured with radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="CallSub3" RaisesSynchronousEvents="true">CallSubNew3</name>
+            <comment>Similar to CallSub. Calls a sub with two arguments.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Component</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Argument1</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Argument2</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="CallSub2" RaisesSynchronousEvents="true">CallSubNew2</name>
+            <comment>Similar to CallSub. Calls a sub with a single argument.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Component</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Argument</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>DipToCurrent</name>
+            <comment>Scales the value, which represents a specific length on a default density device (Density = 1.0),
+to the current device.
+For example, the following code will set the width value of this button to be the same physical size
+on all devices.
+Button1.Width = DipToCurrent(100)
+
+Note that a shorthand syntax for this method is available. Any number followed by the string 'dip'
+will be converted in the same manner (no spaces are allowed between the number and 'dip').
+So the previous code is equivalent to:
+Button1.Width = 100dip 'dip -&gt; density independent pixel</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ATan2</name>
+            <comment>Returns the angle measured with radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Y</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>X</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>While</name>
+            <comment>Loops while the condition is true.
+ Syntax:
+ Do While condition
+  ...
+ Loop</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Min</name>
+            <comment>Returns the smaller number between the two numbers.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number1</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>Number2</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ATanD</name>
+            <comment>Returns the angle measured with degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ExitApplication2</name>
+            <comment>Immediately ends the application and stops the process.
+The specified ExitCode will be returned as the process exit code (0 means no errors).</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ExitCode</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SetSystemProperty</name>
+            <comment>Sets the system property indicated by the given key.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Value</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Power</name>
+            <comment>Returns the Base value raised to the Exponent power.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Base</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>Exponent</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Dim</name>
+            <comment>Declares a variable.
+Syntax:
+Declare a single variable:
+Dim variable name [As type] [= expression]
+The default type is String.
+
+Declare multiple variables. All variables will be of the specified type.
+Dim variable1 [= expression], variable2 [= expression], ..., [As type]
+Note that the shorthand syntax only applies to Dim keyword.
+Example:&lt;code&gt;Dim a = 1, b = 2, c = 3 As Int&lt;/code&gt;
+
+Declare an array:
+Dim variable(Rank1, Rank2, ...) [As type]
+Example:&lt;code&gt;Dim Days(7) As String&lt;/code&gt;
+The actual rank can be omitted for zero length arrays.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>NumberFormat</name>
+            <comment>Converts the specified number to a string. 
+The string will include at least Minimum Integers and at most Maximum Fractions digits.
+Example:&lt;code&gt;
+Log(NumberFormat(12345.6789, 0, 2)) '"12,345.68"
+Log(NumberFormat(1, 3 ,0)) '"001"&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>MinimumIntegers</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>MaximumFractions</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Floor</name>
+            <comment>Returns the largest double that is smaller or equal to the specified number and is equal to an integer.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>LogDebug</name>
+            <comment>Logs a message. The message will only be logged in Debug mode.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Message</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Me</name>
+            <comment>For classes: returns a reference to the current instance.
+For activities and services: returns a reference to an object that can be used with CallSub, CallSubDelayed and SubExists keywords.
+Cannot be used in code modules.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SmartStringFormatter</name>
+            <comment></comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Format</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Value</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Select</name>
+            <comment>Compares a single value to multiple values.
+Example:&lt;code&gt;
+Dim value As Int = 7
+Select value
+	Case 1
+		Log("One")
+	Case 2, 4, 6, 8
+		Log("Even")
+	Case 3, 5, 7, 9
+		Log("Odd larger than one")
+	Case Else
+		Log("Larger than 9")
+End Select&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name DesignerName="CallSub" RaisesSynchronousEvents="true">CallSubNew</name>
+            <comment>Dynamically calls a sub based on the sub name.
+Note that unlike Basic4android CallSub is not required unless you need to call a sub based on the sub name.</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Component</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Return</name>
+            <comment>Returns from the current sub and optionally returns the given value.
+Syntax: Return [value]</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>RndSeed</name>
+            <comment>Sets the random seed value. 
+This method can be used for debugging as it allows you to get the same results each time.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Seed</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>If</name>
+            <comment>Single line:
+If condition Then true-statement [Else false-statement]
+Multiline:
+If condition Then
+ statement
+Else If condition Then
+ statement
+...
+Else
+ statement
+End If</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>StopMessageLoop</name>
+            <comment>Calling this method will cause the thread to stop managing the message queue.
+This method should only be called in non-UI applications.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>CallSubDelayed</name>
+            <comment>Dynamically calls a sub. The sub will be called after the current code execution completes.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Component</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ASinD</name>
+            <comment>Returns the angle measured with degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ExitApplication</name>
+            <comment>Immediately ends the application and stops the process.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Round2</name>
+            <comment>Rounds the given number and leaves up to the specified number of fractional digits.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>DecimalPlaces</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>CharsToString</name>
+            <comment>Creates a new String by copying the characters from the array.
+Copying starts from StartOffset and the number of characters copied equals to Length.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Chars</name>
+                <type>char[]</type>
+            </parameter>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ACosD</name>
+            <comment>Returns the angle measured with degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Type</name>
+            <comment>Declares a structure.
+Can only be used inside sub Globals or sub Process_Globals.
+Syntax:
+Type type-name (field1, field2, ...)
+Fields include name and type.
+Example:&lt;code&gt;
+Type MyType (Name As String, Items(10) As Int)
+Dim a, b As MyType
+a.Initialize
+a.Items(2) = 123&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Abs</name>
+            <comment>Returns the absolute value.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Continue</name>
+            <comment>Stops executing the current iteration and continues with the next one.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Catch</name>
+            <comment>Any exception thrown inside a try block will be caught in the catch block.
+Call LastException to get the caught exception.
+Syntax:
+Try
+ ...
+Catch
+ ...
+End Try</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>GetType</name>
+            <comment>Returns a string representing the object's java type.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>object</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Is</name>
+            <comment>Tests whether the object is of the given type.
+Example:&lt;code&gt;
+For i = 0 To Activity.NumberOfViews - 1
+  If Activity.GetView(i) Is Button Then
+   Dim b As Button
+   b = Activity.GetView(i)
+   b.Color = Colors.Blue
+  End If
+Next&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>ATan</name>
+            <comment>Returns the angle measured with radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Logarithm</name>
+            <comment></comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>Base</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetSystemProperty</name>
+            <comment>Gets the value of the system property mapped to the given key.
+Returns the DefaultValue parameter if there is no such property.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>DefaultValue</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Sender</name>
+            <comment>Returns the object that raised the event.
+Only valid while inside the event sub.
+Example:&lt;code&gt;
+Sub Button_Click
+ Dim b As Button
+ b = Sender
+ b.Text = "I've been clicked"
+End Sub&lt;/code&gt;</comment>
+            <returntype>java.lang.Object</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Log</name>
+            <comment>Logs a message. The log can be viewed in the Logs tab.
+The logs are printed to the default output stream.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Message</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SinD</name>
+            <comment>Calculates the trigonometric sine function. Angle measured in degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Degrees</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Max</name>
+            <comment>Returns the larger number between the two numbers.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number1</name>
+                <type>double</type>
+            </parameter>
+            <parameter>
+                <name>Number2</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>For</name>
+            <comment>Syntax:
+For variable = value1 To value2 [Step interval]
+ ...
+Next
+If the iterator variable was not declared before it will be of type Int.
+
+Or:
+For Each variable As type In collection
+ ...
+Next
+Examples:&lt;code&gt;
+For i = 1 To 10
+ Log(i) 'Will print 1 to 10 (inclusive).
+Next
+For Each n As Int In Numbers 'an array
+ Sum = Sum + n
+Next
+&lt;/code&gt;
+Note that the loop limits will only be calculated once before the first iteration.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Sub</name>
+            <comment>Declares a sub with the parameters and return type.
+Syntax: Sub name [(list of parameters)] [As return-type]
+Parameters include name and type.
+The lengths of arrays dimensions should not be included.
+Example:&lt;code&gt;
+Sub MySub (FirstName As String, LastName As String, Age As Int, OtherValues() As Double) As Boolean
+ ...
+End Sub&lt;/code&gt;
+In this example OtherValues is a single dimension array.
+The return type declaration is different than other declarations as the array parenthesis follow the type and not
+the name (which does not exist in this case).</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>StartMessageLoop</name>
+            <comment>Calling this method causes the thread to start managing the message queue.
+This method should only be called in non-UI applications.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsDevTool</name>
+            <comment>Returns true if ToolName equals B4J.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>ToolName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>CallSubDelayed3</name>
+            <comment>Similar to CallSubDelayed. Calls a sub with two arguments.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Component</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Argument1</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Argument2</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Sqrt</name>
+            <comment>Returns the positive square root.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>CallSubDelayed2</name>
+            <comment>Similar to CallSubDelayed. Calls a sub with a single argument.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>mine</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Component</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>Sub</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Argument</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Asc</name>
+            <comment>Returns the unicode code point of the given character or first character in string.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Char</name>
+                <type>char</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Tan</name>
+            <comment>Calculates the trigonometric tangent function. Angle measured in radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Radians</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>CosD</name>
+            <comment>Calculates the trigonometric cosine function. Angle measured in degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Degrees</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>TanD</name>
+            <comment>Calculates the trigonometric tangent function. Angle measured in degrees.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Degrees</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Round</name>
+            <comment>Returns the long number closest to the given number.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Sin</name>
+            <comment>Calculates the trigonometric sine function. Angle measured in radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Radians</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Not</name>
+            <comment>Inverts the value of the given boolean.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Ceil</name>
+            <comment>Returns the smallest double that is greater or equal to the specified number and is equal to an integer.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Number</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetEnvironmentVariable</name>
+            <comment>Returns the value of the environment variable mapped to the given key.
+Returns the DefaultValue parameter if there is no such variable.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Key</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>DefaultValue</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Cos</name>
+            <comment>Calculates the trigonometric cosine function. Angle measured in radians.</comment>
+            <returntype>double</returntype>
+            <parameter>
+                <name>Radians</name>
+                <type>double</type>
+            </parameter>
+        </method>
+        <method>
+            <name>LastException</name>
+            <comment>Returns the last exception that was caught (if such exists).</comment>
+            <returntype>anywheresoftware.b4a.objects.B4AException</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsNumber</name>
+            <comment>Tests whether the specified string can be safely parsed as a number.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>CreateMap</name>
+            <comment>Creates a Map with the given key / value pairs.
+The syntax is: CreateMap (key1: value1, key2: value2, ...)
+Example: &lt;code&gt;
+Dim m As Map = CreateMap("January": 1, "February": 2)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Until</name>
+            <comment>Loops until the condition is true.
+ Syntax:
+ Do Until condition
+  ...
+ Loop</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>BytesToString</name>
+            <comment>Decodes the given bytes array as a string.
+Data - The bytes array.
+StartOffset - The first byte to read.
+Length - Number of bytes to read.
+CharSet - The name of the character set.
+Example:&lt;code&gt;
+Dim s As String
+s = BytesToString(Buffer, 0, Buffer.Length, "UTF-8")&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Data</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Length</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>CharSet</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <field>
+            <name>TAB</name>
+            <comment>Tab character.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>QUOTE</name>
+            <comment>Quote character. The value of Chr(34).</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>DateTime</name>
+            <comment>Date and time related methods.</comment>
+            <returntype>anywheresoftware.b4a.keywords.DateTime</returntype>
+        </field>
+        <field>
+            <name>Density</name>
+            <comment>Returns the monitor scale, which is DPI / 96.
+(DPI stands for dots per inch).</comment>
+            <returntype>float</returntype>
+        </field>
+        <field>
+            <name>File</name>
+            <comment>Files related methods.</comment>
+            <returntype>anywheresoftware.b4a.objects.streams.File</returntype>
+        </field>
+        <field>
+            <name>cPI</name>
+            <comment>PI constant.</comment>
+            <returntype>double</returntype>
+        </field>
+        <field>
+            <name>True</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </field>
+        <field>
+            <name>CRLF</name>
+            <comment>New line character. The value of Chr(10).</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>Bit</name>
+            <comment>Bitwise related methods.</comment>
+            <returntype>anywheresoftware.b4a.keywords.Bit</returntype>
+        </field>
+        <field>
+            <name>cE</name>
+            <comment>e (natural logarithm base) constant.</comment>
+            <returntype>double</returntype>
+        </field>
+        <field>
+            <name>Null</name>
+            <comment></comment>
+            <returntype>java.lang.Object</returntype>
+        </field>
+        <field>
+            <name>False</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </field>
+        <field>
+            <name>Regex</name>
+            <comment>Regular expressions related methods.</comment>
+            <returntype>anywheresoftware.b4a.keywords.Regex</returntype>
+        </field>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.keywords.Bit</name>
+        <comment>Bit is a predefined object containing bitwise related methods.
+Example:&lt;code&gt;
+Dim flags As Int
+flags = Bit.Or(100, 200)&lt;/code&gt;</comment>
+        <owner>process</owner>
+        <method>
+            <name>InputStreamToBytes</name>
+            <comment>Reads the data from the input stream and writes it into an array of bytes.
+The input stream is automatically closed at the end.</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>In</name>
+                <type>java.io.InputStream</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ToHexString</name>
+            <comment>Returns a string representation of N in base 16.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>UnsignedShiftRight</name>
+            <comment>Shifts N right.
+Shifts zeroes in the leftmost positions.
+Shift - Number of positions to shift.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Shift</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ToBinaryString</name>
+            <comment>Returns a string representation of N in base 2.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Or</name>
+            <comment>Returns the bitwise OR of the two values.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N1</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>N2</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ParseInt</name>
+            <comment>Parses Value as an integer using the specified radix.
+Radix - Should be between 2 to 36.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Radix</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ToOctalString</name>
+            <comment>Returns a string representation of N in base 8.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Xor</name>
+            <comment>Returns the bitwise XOR of the two values.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N1</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>N2</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ShiftLeft</name>
+            <comment>Shifts N left.
+Shift - Number of positions to shift.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Shift</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ShiftRight</name>
+            <comment>Shifts N right.
+Keeps the original value sign
+Shift - Number of positions to shift.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Shift</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>And</name>
+            <comment>Returns the bitwise AND of the two values.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N1</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>N2</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Not</name>
+            <comment>Returns the bitwise complement of the given value.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>N</name>
+                <type>int</type>
+            </parameter>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.Timer</name>
+        <shortname>Timer</shortname>
+        <comment>A Timer object generates ticks events at specified intervals.
+Using a timer is a good alternative to a long loop, as it allows the UI thread to handle other events and messages.
+Note that the timer events will not fire while the UI thread is busy running other code.
+The timer Enabled property is set to False by default. To make it start working you should change it to True.</comment>
+        <owner CheckForReinitialize="true">process</owner>
+        <event>Tick</event>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the timer with the event sub prefix and the specified interval (measured in milliseconds).
+Example:&lt;code&gt;
+Timer1.Initialize("Timer1", 1000)
+Timer1.Enabled = True
+
+Sub Timer1_Tick
+ 'Handle tick events
+End Sub
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>ba</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Interval</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Enabled</name>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Enabled</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Gets or sets whether the timer is enabled (ticking).</comment>
+        </property>
+        <property>
+            <name>Interval</name>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Interval</name>
+                <type>long</type>
+            </parameter>
+            <comment>Gets or sets the interval between tick events, measured in milliseconds.</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.String2</name>
+        <comment>Strings are immutable in Basic4android, which means that you can change the value of a string variable but you cannot change the text stored in a string object.
+So methods like SubString, Trim and ToLowerCase return a new string, &lt;b&gt;they do not change the value of the current string&lt;/b&gt;.
+Typical usage:&lt;code&gt;
+Dim s As String
+s = "some text"
+s = s.Replace("a", "b")&lt;/code&gt;
+You can use StringBuilder if you need a mutable string.
+Note that string literals are also string objects:&lt;code&gt;
+Log(" some text ".Trim)&lt;/code&gt;</comment>
+        <owner>process</owner>
+        <method>
+            <name DesignerName="SubString2">substring</name>
+            <comment>Returns a new string which is a substring of the original string.
+The new string will include the character at BeginIndex and will extend to the character at EndIndex, not including the last character.
+
+Example:
+&lt;code&gt;"012345".SubString2(2, 4) 'returns "23"&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>BeginIndex</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>EndIndex</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="IndexOf2">indexOf</name>
+            <comment>Returns the index of the first occurrence of SearchFor string in the string.
+Starts searching from the given Index.
+Returns -1 if SearchFor was not found.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>SearchFor</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="Trim">trim</name>
+            <comment>Returns a copy of the original string without any leading or trailing white spaces.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name DesignerName="StartsWith">startsWith</name>
+            <comment>Returns true if this string starts with the given Prefix.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Prefix</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="IndexOf">indexOf</name>
+            <comment>Returns the index of the first occurrence of SearchFor string in the string.
+Returns -1 if SearchFor was not found.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>SearchFor</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="Contains">contains</name>
+            <comment>Tests whether the string contains the given string parameter.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>SearchFor</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="GetBytes">getBytes</name>
+            <comment>Encodes the string into a new array of bytes.
+ Example:&lt;code&gt;
+ Dim Data() As Byte
+ Data = "Some string".GetBytes("UTF8")&lt;/code&gt;</comment>
+            <returntype>byte[]</returntype>
+            <parameter>
+                <name>Charset</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="Replace">replace</name>
+            <comment>Returns a new string resulting from the replacement of all the occurrences of Target with Replacement.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Target</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Replacement</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="EndsWith">endsWith</name>
+            <comment>Returns true if this string ends with the given Suffix.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Suffix</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="ToUpperCase">toUpperCase</name>
+            <comment>Returns a new string which is the result of upper casing this string.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name DesignerName="SubString">substring</name>
+            <comment>Returns a new string which is a substring of the original string.
+The new string will include the character at BeginIndex and will extend to the end of the string.
+
+Example:
+&lt;code&gt;"012345".SubString(2) 'returns "2345"&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>BeginIndex</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="CompareTo">compareTo</name>
+            <comment>Lexicographically compares the two strings.
+Returns a value less than 0 if the current string precedes Other.
+Returns 0 if both strings are equal.
+Returns a value larger than 0 if the current string comes after Other.
+Note that upper case characters precede lower case characters.
+
+Examples:&lt;code&gt;
+"abc".CompareTo("da") ' &lt; 0 
+"abc".CompareTo("Abc") ' &gt; 0
+"abc".CompareTo("abca")' &lt; 0 &lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Other</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="CharAt">charAt</name>
+            <comment>Returns the character at the given index.</comment>
+            <returntype>char</returntype>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="Length">length</name>
+            <comment>Returns the length of this string.</comment>
+            <returntype>int</returntype>
+        </method>
+        <method>
+            <name DesignerName="LastIndexOf">lastIndexOf</name>
+            <comment>Returns the index of the first occurrence of SearchFor string in the string.
+The search starts at the end of the string and advances to the beginning.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>SearchFor</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="EqualsIgnoreCase">equalsIgnoreCase</name>
+            <comment>Returns true if both strings are equal ignoring their case.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>other</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name DesignerName="ToLowerCase">toLowerCase</name>
+            <comment>Returns a new string which is the result of lower casing this string.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name DesignerName="LastIndexOf2">lastIndexOf</name>
+            <comment>Returns the index of the first occurrence of SearchFor string in the string.
+The search starts at the given index and advances to the beginning.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>SearchFor</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Index</name>
+                <type>int</type>
+            </parameter>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.B4AException</name>
+        <shortname>Exception</shortname>
+        <comment>Holds a thrown exception.
+You can access the last thrown exception by calling LastException.
+For example:&lt;code&gt;
+Try
+   Dim in As InputStream
+   in = File.OpenInput(File.DirInternal, "SomeMissingFile.txt")
+   '...
+Catch
+   Log(LastException.Message)
+End Try
+If in.IsInitialized Then in.Close&lt;/code&gt;</comment>
+        <objectwrapper>java.lang.Exception</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Message</name>
+            <returntype>java.lang.String</returntype>
+            <comment></comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.streams.File</name>
+        <comment>File is a predefined object that holds methods for working with files.</comment>
+        <owner>process</owner>
+        <method>
+            <name>DirData</name>
+            <comment>Returns the path to a folder that is suitable for writing files.
+On Windows, folders under Program Files are read-only. Therefore File.DirApp will be read-only as well.
+This method returns the same path as File.DirApp on non-Windows computers.
+On Windows it returns the path to the user data folder. For example:
+C:\Users\[user name]\AppData\Roaming\[AppName]</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>AppName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>WriteMap</name>
+            <comment>Creates a new file and writes the given map. Each key value pair is written as a single line.
+All values are converted to strings.
+See this link for more information about the actual format: &lt;link&gt;Properties format|http://en.wikipedia.org/wiki/.properties&lt;/link&gt;.
+You can use File.ReadMap to read this file.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Map</name>
+                <type>anywheresoftware.b4a.objects.collections.Map</type>
+            </parameter>
+        </method>
+        <method>
+            <name>OpenOutput</name>
+            <comment>Opens (or creates) the specified file which is located in the Dir folder for writing.
+If Append is true then the new data will be written at the end of the existing file.
+This method does not support files in the assets folder.</comment>
+            <returntype>anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Append</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ListFiles</name>
+            <comment>Returns a read only list with all the files and directories which are stored in the specified path.
+ An uninitialized list will be returned if the folder is not accessible.
+This method does not support the assets folder.</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.List</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>OpenInput</name>
+            <comment>Opens the specified file name which is located in the Dir folder for reading.
+Note that the file names are case sensitive.</comment>
+            <returntype>anywheresoftware.b4a.objects.streams.File.InputStreamWrapper</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Combine</name>
+            <comment>Returns the full path to the given file.
+This methods does not support files in the assets folder.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetUri</name>
+            <comment>Returns a Uri string ("file://...") that points to the given file.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Copy</name>
+            <comment>Copies the specified source file to the target file name.
+Note that it is not possible to copy files to the Assets folder.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>DirSource</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileSource</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>DirTarget</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileTarget</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Copy2</name>
+            <comment>Copies all the available data from the input stream into the output stream.
+The input stream is automatically closed at the end.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>In</name>
+                <type>java.io.InputStream</type>
+            </parameter>
+            <parameter>
+                <name>Out</name>
+                <type>java.io.OutputStream</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ReadMap</name>
+            <comment>Reads the file and parses each line as a key-value pair (of strings).
+See this link for more information about the actual format: &lt;link&gt;Properties format|http://en.wikipedia.org/wiki/.properties&lt;/link&gt;.
+You can use File.WriteMap to write a map to a file.
+Note that the order of items in the map may not be the same as the order in the file.</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.Map</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ReadList</name>
+            <comment>Reads the entire file and returns a List with all lines (as strings).
+Example:&lt;code&gt;
+Dim List1 As List
+List1 = File.ReadList(File.DirApp, "1.txt")
+For i = 0 to List1.Size - 1
+	Log(List1.Get(i))
+Next &lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.List</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetFileParent</name>
+            <comment>Returns the path of the file or folder parent.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsDirectory</name>
+            <comment>Tests whether the specified file is a directory.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>WriteList</name>
+            <comment>Writes each item in the list as a single line.
+Note that a value containing CRLF will be saved as two lines (which will return two item when read with ReadList).
+All values will be converted to strings.
+Example:&lt;code&gt;
+File.WriteList (File.DirApp, "mylist.txt", List1)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>List</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Exists</name>
+            <comment>Returns true if the specified FileName exists in the specified Dir.
+Note that the file system is case sensitive.
+This method does not support File.DirAssets.
+
+Example:&lt;code&gt;
+If File.Exists(File.DirApp, "MyFile.txt") Then ...&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ReadString</name>
+            <comment>Reads the file and returns its content as a string.
+Example:&lt;code&gt;
+Dim text As String
+text = File.ReadString(File.DirApp, "1.txt")&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Delete</name>
+            <comment>Deletes the specified file. If the file name is a directory then it must be empty in order to be deleted.
+Returns true if the file was successfully deleted.
+Files in the assets folder cannot be deleted.</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>MakeDir</name>
+            <comment>Creates the given folder (creates all folders as needed).
+Example:&lt;code&gt;
+File.MakeDir(File.DirApp, "music/90")&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Parent</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>LastModified</name>
+            <comment>Returns the last modified date of the specified file.
+This method does not support files in the assets folder.
+Example:&lt;code&gt;
+Dim d As Long
+d = File.LastModified(File.DirApp, "1.txt")
+Msgbox(DateTime.Date(d), "Last modified")&lt;/code&gt;</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>WriteString</name>
+            <comment>Writes the given text to a new file.
+Example:&lt;code&gt;
+File.WriteString(File.DirApp, "1.txt", "Some text")&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ReadMap2</name>
+            <comment>Similar to ReadMap. ReadMap2 adds the items to the given Map.
+By using ReadMap2 with a populated map you can force the items order as needed.
+Example:&lt;code&gt;
+Dim m As Map
+m.Initialize
+m.Put("Item #1", "")
+m.Put("Item #2", "")
+m = File.ReadMap2(File.DirApp, "settings.txt", m)&lt;/code&gt;</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.Map</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Map</name>
+                <type>anywheresoftware.b4a.objects.collections.Map</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetName</name>
+            <comment>Returns the file name from the full path (or the directory name in case of a directory).</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>FilePath</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Size</name>
+            <comment>Returns the size in bytes of the specified file.
+This method does not support files in the assets folder.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>Dir</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>FileName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <property>
+            <name>DirTemp</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the temporary folder.</comment>
+        </property>
+        <property>
+            <name>DirApp</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns the application folder.</comment>
+        </property>
+        <property>
+            <name>DirAssets</name>
+            <returntype>java.lang.String</returntype>
+            <comment>Returns a reference to the files added to the Files tab. These files are read-only (in Release mode).</comment>
+        </property>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.streams.File.InputStreamWrapper</name>
+        <shortname>InputStream</shortname>
+        <comment>A stream that you can read from. Usually you will pass the stream to a "higher level" object like TextReader that will handle the reading.
+You can use File.OpenInput to get a file input stream.</comment>
+        <objectwrapper>java.io.InputStream</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Close</name>
+            <comment>Closes the stream.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>BytesAvailable</name>
+            <comment>Returns an estimation of the number of bytes available without blocking.</comment>
+            <returntype>int</returntype>
+        </method>
+        <method>
+            <name>ReadBytes</name>
+            <comment>Reads up to MaxCount bytes from the stream and writes it to the given Buffer.
+The first byte will be written at StartOffset.
+Returns the number of bytes actually read.
+Returns -1 if there are no more bytes to read.
+Otherwise returns at least one byte.
+Example:&lt;code&gt;
+Dim buffer(1024) As byte
+count = InputStream1.ReadBytes(buffer, 0, buffer.length)&lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Buffer</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>MaxCount</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>InitializeFromBytesArray</name>
+            <comment>Use File.OpenInput to get a file input stream.
+This method should be used to read data from a bytes array.
+Initializes the input stream and sets it to read from the specified bytes array.
+StartOffset - The first byte that will be read.
+MaxCount - Maximum number of bytes to read.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Buffer</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>MaxCount</name>
+                <type>int</type>
+            </parameter>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper</name>
+        <shortname>OutputStream</shortname>
+        <comment>A stream that you can write to. Usually you will pass the stream to a "higher level" object like TextWriter which will handle the writing.
+Use File.OpenOutput to get a file output stream.</comment>
+        <objectwrapper>java.io.OutputStream</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>WriteBytes</name>
+            <comment>Writes the buffer to the stream. The first byte to be written is Buffer(StartOffset), 
+and the last is Buffer(StartOffset + Length - 1).</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Buffer</name>
+                <type>byte[]</type>
+            </parameter>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Flush</name>
+            <comment>Flushes any buffered data.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the stream.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>ToBytesArray</name>
+            <comment>Returns a copy of the internal bytes array. Can only be used when the output stream was initialized with InitializeToBytesArray.</comment>
+            <returntype>byte[]</returntype>
+        </method>
+        <method>
+            <name>InitializeToBytesArray</name>
+            <comment>Use File.OpenOutput to get a file output stream.
+This method should be used to write data to a bytes array.
+StartSize - The starting size of the internal bytes array. The size will increase if needed.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>StartSize</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.streams.File.TextWriterWrapper</name>
+        <shortname>TextWriter</shortname>
+        <comment>Writes text to the underlying stream.&lt;br/&gt;
+
+Example:&lt;code&gt;
+Dim Writer As TextWriter
+Writer.Initialize(File.OpenOutput(File.DirDefaultExternal, "1.txt", False))
+Writer.WriteLine("This is the first line.")
+Writer.WriteLine("This is the second line.")
+Writer.Close&lt;/code&gt;</comment>
+        <objectwrapper>java.io.BufferedWriter</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes this object by wrapping the given OutputStream using the UTF8 encoding.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>OutputStream</name>
+                <type>java.io.OutputStream</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Flush</name>
+            <comment>Flushes any buffered data.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>WriteLine</name>
+            <comment>Writes the given Text to the stream followed by a new line character.
+ Example:&lt;code&gt;
+ 	Dim Writer As TextWriter
+	Writer.Initialize(File.OpenOutput(File.DirDefaultExternal, "1.txt", False))
+	Writer.WriteLine("This is the first line.")
+	Writer.WriteLine("This is the second line.")
+	Writer.Close &lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the stream.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>WriteList</name>
+            <comment>Writes each item in the list as a single line.
+Note that a value containing CRLF will be saved as two lines (which will return two item when read with ReadList).
+All values will be converted to strings.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>List</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Write</name>
+            <comment>Writes the given Text to the stream.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize2</name>
+            <comment>Initializes this object by wrapping the given OutputStream using the specified encoding.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>OutputStream</name>
+                <type>java.io.OutputStream</type>
+            </parameter>
+            <parameter>
+                <name>Encoding</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.objects.streams.File.TextReaderWrapper</name>
+        <shortname>TextReader</shortname>
+        <comment>Reads text from the underlying stream.</comment>
+        <objectwrapper>java.io.BufferedReader</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes this object by wrapping the given InputStream using the UTF8 encoding.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>InputStream</name>
+                <type>java.io.InputStream</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Skip</name>
+            <comment>Skips the specified number of characters.
+Returns the actual number of characters that were skipped (which may be less than the specified value).</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>NumberOfCharaceters</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Ready</name>
+            <comment>Tests whether there is at least one character ready for reading without blocking.</comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>ReadList</name>
+            <comment>Reads the remaining text and returns a List object filled with the lines.
+Closes the stream when done.</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.List</returntype>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Closes the stream.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>ReadLine</name>
+            <comment>Reads the next line from the stream. The new line characters are not returned.
+Returns Null if there are no more characters to read.
+
+Example:&lt;code&gt;
+	Dim Reader As TextReader
+	Reader.Initialize(File.OpenInput(File.InternalDir, "1.txt"))
+	Dim line As String
+ 	line = Reader.ReadLine
+ 	Do While line &lt;&gt; Null
+		Log(line)
+		line = Reader.ReadLine
+	Loop
+	Reader.Close&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>ReadAll</name>
+            <comment>Reads all of the remaining text and closes the stream.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>Read</name>
+            <comment>Reads characters from the stream and into the Buffer.
+Reads up to Length characters and puts them in the Buffer starting as StartOffset.
+Returns the actual number of characters read from the stream.
+Returns -1 if there are no more characters available.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Buffer</name>
+                <type>char[]</type>
+            </parameter>
+            <parameter>
+                <name>StartOffset</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>Length</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Initialize2</name>
+            <comment>Initializes this object by wrapping the given InputStream using the specified encoding.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>InputStream</name>
+                <type>java.io.InputStream</type>
+            </parameter>
+            <parameter>
+                <name>Encoding</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4a.DynamicBuilder</name>
+        <owner>process</owner>
+        <method>
+            <name>build</name>
+            <comment></comment>
+            <returntype>T</returntype>
+            <parameter>
+                <name>prev</name>
+                <type>java.lang.Object</type>
+            </parameter>
+            <parameter>
+                <name>props</name>
+                <type>java.util.Map</type>
+            </parameter>
+            <parameter>
+                <name>designer</name>
+                <type>boolean</type>
+            </parameter>
+            <parameter>
+                <name>tag</name>
+                <type>java.lang.Object</type>
+            </parameter>
+        </method>
+    </class>
+    <version>4.7</version>
+</root>

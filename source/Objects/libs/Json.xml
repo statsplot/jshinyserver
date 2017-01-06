@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.04</doclet-version-NOT-library-version>
+    <class>
+        <name>anywheresoftware.b4j.objects.collections.JSONParser</name>
+        <shortname>JSONParser</shortname>
+        <comment>Parses JSON formatted strings: &lt;link&gt;Description of JSON|http://www.json.org/&lt;/link&gt;.
+JSON objects are converted to Maps and JSON arrays are converted to Lists.
+After initializing the object you will usually call NextObject to get a single Map object.
+If the JSON string top level value is an array you should call NextArray.
+Afterward you should work with the Map or List and fetch the required data.
+See the &lt;link&gt;JSON tutorial|http://www.basic4ppc.com/forum/basic4android-getting-started-tutorials/6923-android-json-tutorial.html&lt;/link&gt;.
+Typical code:&lt;code&gt;
+Dim JSON As JSONParser
+Dim Map1 As Map
+JSON.Initialize(File.ReadString(File.DirAssets, "example.json")) 'Read the text from a file.
+Map1 = JSON.NextObject&lt;/code&gt;</comment>
+        <objectwrapper>org.json.JSONTokener</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the object and sets the text that will be parsed.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Text</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>NextArray</name>
+            <comment>Parses the text assuming that the top level value is an array.</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.List</returntype>
+        </method>
+        <method>
+            <name>NextValue</name>
+            <comment>Parses the text assuming that the top level value is a simple value.</comment>
+            <returntype>java.lang.Object</returntype>
+        </method>
+        <method>
+            <name>NextObject</name>
+            <comment>Parses the text assuming that the top level value is an object.</comment>
+            <returntype>anywheresoftware.b4a.objects.collections.Map</returntype>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+    </class>
+    <class>
+        <name>anywheresoftware.b4j.objects.collections.JSONParser.JSONGenerator</name>
+        <shortname>JSONGenerator</shortname>
+        <comment>This object generates JSON strings.
+It can be initialized with a Map or a List. Both can contain other Maps or Lists.
+See the &lt;link&gt;JSON tutorial|http://www.basic4ppc.com/forum/basic4android-getting-started-tutorials/6923-android-json-tutorial.html&lt;/link&gt;.</comment>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initializes the object with the given Map.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Map</name>
+                <type>anywheresoftware.b4a.objects.collections.Map</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ToPrettyString</name>
+            <comment>Creates a JSON string from the initialized object.
+The string will be indented and easier for reading.
+Note that the string created is a valid JSON string.
+Indent - Number of spaces to add to each level.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>Indent</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>ToString</name>
+            <comment>Creates a JSON string from the initialized object.
+This string does not include any extra whitespace.</comment>
+            <returntype>java.lang.String</returntype>
+        </method>
+        <method>
+            <name>Initialize2</name>
+            <comment>Initializes the object with the given List.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>List</name>
+                <type>anywheresoftware.b4a.objects.collections.List</type>
+            </parameter>
+        </method>
+    </class>
+    <version>1.1</version>
+</root>
