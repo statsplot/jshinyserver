@@ -79,7 +79,7 @@ A reverse proxy can be used to forward requests from ports below 1024 to jShiny 
 
 ### Deploy with docker   
   - **non-root user inside container**  
-By default, docker daemon starts container with root(superuser). Superuser/non-root inside a container don't get all the [Linux capabilities] as superuser in the host. Most of the time it's safe to run with superuser.  
+By default, docker daemon starts container with root(superuser). Superuser/non-root inside a container don't get all the [Linux capabilities] as superuser/non-root in the host. Most of the time it's safe to run with superuser.  
 
 It's a good practice to run as non-root (the same as running in the host). When starting a container, [specify non-root user] by   
 ```
@@ -118,12 +118,15 @@ The URL patthern is `http://{ip}:{port}/shiny/{appname}/index.html` which is dif
 If other resources(js/css/png) locate in `{appname}/www/` folder, make sure to refer them as a relative path to the `index.html`    
 
 
-#### Common steps
-If a shiny app doesn’t work, follow next steps:   
+#### Troubleshooting steps
+If a shiny app doesn’t work, follow next steps:  
+If any proxy is used (client side), close it and try again.   
+ 
 1) Check the following logs:  
 `logs/app_{appname}.log`  
 `logs/server_cmd.log`  
-`logs/server_output_{date time}.log`  
+`logs/server_output_{date time}.log`   
+
 
 2) If no information can be found in app/server logs, you should set loglevel=debug and shiny_sanitize_errors = false(for shiny version >=0.14).  
 Restart the server and run the app. Check `r_stdout.log`/`r_stdout.log`.   
@@ -140,11 +143,11 @@ runApp(appDir ="shinyappname" ,port=9999,launch.browser = FALSE ,display.mode = 
 When running inside a docker container, you need to make the port 9999 mapped to an external port
 ```
 # map port 9999 to internal 9999
-docker run -d  -p 8888:8888 -p 9999:9999 --name ss jshinyserver
+docker run -d  -p 8888:8888 -p 9999:9999 --name shinyserver jshinyserver
 # get the command line inside the container
-docker exec -ti ss /bin/bash
+docker exec -ti shinyserver /bin/bash
 # run R code
-# press CTRL+P then CTRL+Q to exit 
+# press CTRL+P then CTRL+Q to exit docker container
 ```
 If no error or exception are displayed, test with browser `http://{ip}:9999/`. If it works but not in the jShiny server mode, create an issue for help.
 
