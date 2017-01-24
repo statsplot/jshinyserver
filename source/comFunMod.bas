@@ -306,18 +306,39 @@ Public Sub ws_SetMaxTextMessage(ws2 As WebSocket ,sizeKb As Int)
    jo.RunMethod("setMaxTextMessageSize", Array(sizeKb*1000))
 End Sub
 
-public Sub Server_setStaticAndErrorpages (Server2 As Server)
-	Dim staticfilemap As Map =CreateMap("gzip":True,"dirAllowed":False,"etags":True,"cacheControl":"max-age=300","acceptRanges":False)
-	Server2.SetStaticFilesOptions(staticfilemap)	
-	Dim err As Map
-	err.Initialize
-	err.Put(404, "/404.html") 'page not found
-	err.Put(500, "/500.html") 'server error
-	err.Put("org.eclipse.jetty.server.error_page.global", "/errors.html")
-	Server2.SetCustomErrorPages(err)	
+public Sub Server_setStaticAndErrorpages (Server2 As Server,staticfileMap As Map,errMap As Map)
+	Dim staticfilemap_default As Map =CreateMap("gzip":True,"dirAllowed":False,"etags":True,"cacheControl":"max-age=300","acceptRanges":False)		
+	Dim err_default As Map
+	err_default.Initialize
+	err_default.Put(404, "/404.html") 'page not found
+	err_default.Put(500, "/500.html") 'server error
+	err_default.Put("org.eclipse.jetty.server.error_page.global", "/errors.html")
+	
+	CltUtils.merge_map(staticfilemap_default,staticfileMap)
+	CltUtils.merge_map(err_default,errMap)
+
+	Server2.SetStaticFilesOptions(staticfilemap_default)
+	Server2.SetCustomErrorPages(err_default)	
 End Sub
 
-
+'https://b4x.com/android/forum/threads/server-how-to-change-the-ip-address-in-b4j-2017_mm_dd-request-log.75494/#post-479064
+public Sub Server_ProxyIPinLog (Server2 As Server)
+	
+	Dim josrvr As JavaObject = Server2
+	josrvr = josrvr.GetField("server")
+	Dim jo As JavaObject = josrvr
+	Do While GetType(jo) <> "org.eclipse.jetty.server.handler.HandlerCollection"
+		jo = jo.RunMethodJO("getHandler", Null)
+	Loop
+	Dim allHandlers() As Object = jo.RunMethod("getHandlers", Null)
+   	
+	For Each h As JavaObject In allHandlers
+		If GetType(h) = "org.eclipse.jetty.server.handler.RequestLogHandler" Then
+			Dim requestLog As JavaObject = h.RunMethod("getRequestLog", Null)
+			requestLog.RunMethod("setPreferProxiedForAddress", Array(True))
+		End If
+    Next	
+End Sub
 
 
 
@@ -493,7 +514,7 @@ Public Sub printSystemInformation
 
 	DateTime.SetTimeZone(0)
 	DateTime.DateFormat="yyyy-MM-dd"
- 	DateTime.TimeFormat="HH:mm:ss"	
+ 	DateTime.TimeFormat="HH:mm:ss.S"	
 	Log($"Time = ${DateTime.Date(DateTime.Now)} ${DateTime.Time(DateTime.Now)} UTC"$)	
 	Log($"Serverversion = ${Main.ShinyServerVersion}"$)
 	Dim NativeMe As JavaObject
@@ -1369,11 +1390,11 @@ public Sub clearshinyvMap
 	shinyvMap.Clear
 End Sub
 
-'yyyy-MM-ddTHH:mm:ssZ
+'yyyy-MM-ddTHH:mm:ss.S Z(UTC)
 public Sub PrintDT As String
 	DateTime.SetTimeZone(0)
 	DateTime.DateFormat="yyyy-MM-dd"
- 	DateTime.TimeFormat="HH:mm:ss"	
+ 	DateTime.TimeFormat="HH:mm:ss.S"	
 	Dim dt As Long = DateTime.Now
 	Dim sb As StringBuilder
 	sb.Initialize
@@ -1386,7 +1407,7 @@ End Sub
 
 'yyyy_MM_dd_HH_mm_ss so it can be used in a file/folder name
 public Sub PrintDT2 As String
-	Dim dtmap As Map = getDT(0)
+	Dim dtmap As Map = getDT2(0)
 	Dim date As String = dtmap.Get("date")
 	Dim time As String = dtmap.Get("time")
 	Dim delim As String = "_"
@@ -1395,15 +1416,23 @@ public Sub PrintDT2 As String
 	Return date & delim & time
 End Sub
 
-'{date:"yyyy-MM-dd",time:"HH:mm:ss"}
+'{date:"yyyy-MM-dd",time:"HH:mm:ss.S"}
 public Sub getDT(tz As Int) As Map
+	DateTime.SetTimeZone(tz)
+	DateTime.DateFormat="yyyy-MM-dd"
+ 	DateTime.TimeFormat="HH:mm:ss.S"	
+	Dim dt As Long = DateTime.Now
+	Return CreateMap("date":DateTime.Date(dt),"time":DateTime.Time(dt))
+End Sub
+
+'{date:"yyyy-MM-dd",time:"HH:mm:ss"}
+public Sub getDT2(tz As Int) As Map
 	DateTime.SetTimeZone(tz)
 	DateTime.DateFormat="yyyy-MM-dd"
  	DateTime.TimeFormat="HH:mm:ss"	
 	Dim dt As Long = DateTime.Now
 	Return CreateMap("date":DateTime.Date(dt),"time":DateTime.Time(dt))
 End Sub
-
 
 'msgType : fatal error warn info debug other (case insenitive)
 'msgTag  : msg Tag( could be sub name or empty string)
@@ -1648,6 +1677,8 @@ Sub checkConfigAvailable As Boolean
 	kvMap.Put("app_idle_timeout",longMap4)	
 	Dim longMap5 As Map = CreateMap("type":"long","min":10,"max":50)
 	kvMap.Put("app_init_timeout",longMap5)
+	Dim longMap6 As Map = CreateMap("type":"long","min":10,"max":1000000000)
+	kvMap.Put("wwwfile_maxage",longMap6)
 		
 'double	
 	Dim doubleMap As Map = CreateMap("type":"double","min":0.1,"max":1)
@@ -1661,7 +1692,9 @@ Sub checkConfigAvailable As Boolean
 	kvMap.Put("rbin",stringMap)
 	kvMap.Put("shiny_sanitize_errors",stringMap)
 	kvMap.Put("loglevel",stringMap)
-			
+	kvMap.Put("enablegzip",stringMap)	
+	kvMap.Put("bindip",stringMap)
+				
 'string (could be empty) 	
 	Dim stringMap As Map = CreateMap("type":"string","min":0)
 	kvMap.Put("pandoc",stringMap)	

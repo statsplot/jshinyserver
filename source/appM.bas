@@ -289,6 +289,7 @@ public Sub ShinyStartbyAppname(appNametmp As String)
 	
 	If app2start.IndexOf(appNametmp)=-1 And verifyAppnConfTsMap.ContainsKey(appNametmp) = False  Then
 		app2start.Add(appNametmp)
+	    comFunMod.AppLg(appNametmp, "info", "ShinyStartbyAppname", $"Added to the queue"$)		
 	End If
 
 
@@ -347,7 +348,7 @@ private Sub	verifyAppInit
 		app2start.RemoveAt(0)	
 		verifyAppnConfTsMap.Put(	AppnameSingle , cfmap )
 			
-	    comFunMod.AppLg(AppnameSingle, "info", "verifyAppInit", $" port=${cfmap.Get("port")} "$)
+	    comFunMod.AppLg(AppnameSingle, "info", "verifyAppInit", $"Initializing port=${cfmap.Get("port")} "$)
 			
 		startShinyByConfmap( cfmap ,OSName , getSettingMapValue("r_args"))	
 		cfmap.Put("status",ST_STARTING)

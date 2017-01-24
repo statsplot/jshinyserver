@@ -125,27 +125,43 @@ Sub AppStart (Args() As String)
 'relay for websockets
 	srvr.AddWebSocket("/relay/ws", "wsRelayHandler")
 
+
 	
 	srvr.port = srvrPort
 	srvr.DebugNetworkLatency = 200
 	srvr.LogsRetainDays=10	
-	comFunMod.Server_setStaticAndErrorpages(srvr)
-	
-	'Try to set GzipEnabled (jServer 2.70+) and print sha1 of server.jar 
-	Try
-		srvr.GzipEnabled = True
+	comFunMod.Server_setStaticAndErrorpages(srvr,CreateMap("cacheControl":"max-age="&appM.getSettingMapValue("wwwfile_maxage" ) ),CreateMap())
+
+'server.jar SHA-1 can be used to checked server version
+	If File.Exists(File.DirApp,"server.jar") Then
 		Dim Hash_str As String = comFunMod.getFileHash(File.DirApp,"server.jar","SHA-1")	
-		Log($"server.jar sha1 = ${Hash_str}"$)
-	Catch
-		'Log(LastException)
-	End Try
+		Log($"server_jar_sha1 = ${Hash_str}"$)
+	Else
+		Log($"server_jar_sha1 = file not found"$)				
+	End If
+
+'https://www.b4x.com/android/forum/threads/could-jetty-listen-on-an-explicit-ip.67270/#content	
+	Dim jo As JavaObject = srvr
+	jo.SetField("host", appM.getSettingMapValue("bindip"))
+				
+	'Try to set GzipEnabled (jServer 2.70+) 
+	If appM.getSettingMapValue("enablegzip") <> "false" Then
+		Try	
+			srvr.GzipEnabled = True
+		Catch
+			'Log(LastException)
+		End Try
+	End If
 					
 	srvr.Start
+
 		
 	comFunMod.LogFmt("info", "", $" Server started ============ "$)
 	comFunMod.Server_RemoveVersionFromResponses(srvr)
 	comFunMod.Server_setFormMaxSize(srvr, appM.formMaxSizeKb)
 
+'real IP in b4j-yyyy_MM_dd.request.log
+   	comFunMod.Server_ProxyIPinLog(srvr)
 
 'write pid of server	
 	File.Delete(ServerPIDPath,"server.pid")
@@ -155,5 +171,6 @@ Sub AppStart (Args() As String)
 	comFunMod.LogFmt("fatal", "", $" main thread StopMessageLoop;Sever will not work "$)
 	
 End Sub
+
 
 

@@ -43,10 +43,8 @@ Try
 	ws = WebSocket1
 	comFunMod.ws_SetMaxTextMessage(ws, appM.wsMaxTextSizeKb)
 	
-	'get remote IP, checking X-Real-IP and X-Forwarded-For
-	If ws.UpgradeRequest.GetHeader("X-Real-IP")<>"" Then
-		RemoteIP = ws.UpgradeRequest.GetHeader("X-Real-IP")
-	else if ws.UpgradeRequest.GetHeader("X-Forwarded-For")<>"" Then
+	'get remote IP, checking X-Forwarded-For
+	If ws.UpgradeRequest.GetHeader("X-Forwarded-For")<>"" Then
 		RemoteIP = ws.UpgradeRequest.GetHeader("X-Forwarded-For")
 	Else
 		RemoteIP = ws.UpgradeRequest.RemoteAddress

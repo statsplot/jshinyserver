@@ -39,8 +39,8 @@ If redirect_output=true stderr and stdout will be redirected to a separated file
 
 
 
-  - **app_idle_timeout** 
-time(seconds) to close a R instance after no connection to it;
+  - **app_idle_timeout**  
+time(seconds) to terminate the R instance after no connection to it;
 min value is 40
 
   - **app_init_timeout**  
@@ -51,7 +51,7 @@ min value is 10, max value is 50
 app url format : http(s)://{ip/domain}:port/{htmlroot}/{appname}/index.html; should be English letters (Not allowed: share, shared_*, download , cache , doc )
 
   - **client_maxidle_timeout**  
-when the connection to a client(browser) is not active(no traffic) more than client_maxidle_timeout (seconds), the websocket connection to this client will be disconnected;
+when the connection to a client(browser) is not active(active connection is a connection with both input and output traffic) more than client_maxidle_timeout (seconds), the websocket connection to this client will be disconnected;
 min value = 120
 
   - **wsmaxtextsizekb/wscmaxtextsizekb**  
@@ -91,6 +91,19 @@ default value `r_args = --vanilla`
 R ${r_args} -q -e source('/path/to/script/init/shiny.R')
 ```
 
+  - **enablegzip**  
+Added in v0.95.  
+Enable gzip for all response. Possible values: true(default)/false.  
+
+  - **bindip**  
+Added in v0.95.  
+Specify the interface(s) accepted by the server.  
+Possible values: 0.0.0.0(default, accept all ip interfaces) / 127.0.0.1 / public ip (any public ip of the host)  
+
+  - **wwwfile_maxage**  
+Added in v0.95.  
+Specify the expire time of `www` files in client browsers cache. Server will set this header :`cacheControl":"max-age=...`.  
+Default is 3600  
 
 
 

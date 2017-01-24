@@ -85,5 +85,10 @@ Public Sub String2List_mod (str As String,delimiter As String,checkIsNumber As B
 End Sub
 
 
-
+'every key and value pair in sourceMap will be added to the targetMap, if targetMap contains this key,the value will be replaced 
+Public Sub merge_map(targetMap As Map, sourceMap As Map)
+	For Each key As Object In sourceMap.Keys
+		targetMap.Put(key,sourceMap.Get(key))
+	Next	
+End Sub
 

@@ -5,7 +5,10 @@ You can build the server from source on Windows. Please download the [releases] 
 ### Install B4J IDE
 Please install B4J IDE per the instructions in https://b4x.com/b4j.html. This project is built with Version 4.20(1) or above. Note that you need to install JDK instead of JRE.  
 
-Dependencies are in `dependencies_for_building.zip`, unzip them to a folder e.g. `D:\shiny\libs\additional` 
+For v0.94, B4J 4.20 is used. Dependencies are in `dependencies_for_building.zip`, unzip them to a folder e.g. `D:\shiny\libs\additional`   
+
+For v0.95, B4J 4.70 is used. Dependencies are in `source/Objects/libs`, read the `LICENSE` file first. *Copy* additional lib files to a folder e.g. `D:\shiny\libs\additional`   
+
 
 A bug was reported in jCore library(4.20) which comes with B4J 4.20  ( https://www.b4x.com/android/forum/threads/updates-to-internal-libaries.48274/#post-416708 ). It’s been fixed in B4J 4.50.
 
